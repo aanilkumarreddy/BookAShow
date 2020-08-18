@@ -1,1 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+$app-dark-primary: mat-palette($mat-grey, 900);
+$app-dark-accent: mat-palette($mat-yellow, 800);
+// $app-dark-primary: mat-palette($mat-orange, 500, A700);
+// $app-dark-accent: mat-palette($mat-grey, 900);
+$app-dark-warn: mat-palette($mat-red, 500);
+//  $app-dark-primary,
+// $app-dark-accent,
+// $app-dark-warn
+$app-dark-theme: mat-dark-theme(
+  (
+    color: (
+      primary: $app-dark-primary,
+      accent: $app-dark-accent,
+      warn: $app-dark-warn,
+    ),
+  )
+);
+$app-dark-color: mat-palette($mat-grey, 50);
+/*
+$angular-dark-theme: mat-dark-theme(
+  (
+    color: (
+      primary: $angular-primary,
+      accent: $angular-accent,
+      warn: $angular-warn,
+    ),
+  )
+);
+
+.darkMode {
+  @include angular-material-color($angular-dark-theme);
+}
+*/
+.dark-theme {
+  @include angular-material-theme($app-dark-theme);
+  // color: mat-color($app-dark-color);
+
+  // Get a specific hue for a palette.
+  // See https://material.io/archive/guidelines/style/color.html#color-color-palette for hues.
+  // background-color: mat-color($app-dark-primary, darker);
+
+  // Get a relative color for a hue ('lighter' or 'darker')
+  // outline-color: mat-color($app-dark-accent, lighter);
+
+  // Get a contrast color for a hue by adding `-contrast` to any other key.
+  // border-color: mat-color($app-dark-primary, "100-contrast");
+}
+// Normal theme
+$app-light-primary: mat-palette($mat-indigo);
+$app-light-accent: mat-palette($mat-pink, A200, A100, A400);
+$app-light-theme: mat-light-theme($app-light-primary, $app-light-accent);
+@include angular-material-theme($app-light-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

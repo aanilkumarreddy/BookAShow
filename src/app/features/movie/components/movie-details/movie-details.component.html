@@ -1,0 +1,78 @@
+<div class="movie-details">
+  <div
+    class="details-row"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    [ngClass.xs]="'mobile-screen'"
+  >
+    <mat-card
+      [fxFlex]="100 / 3 + '%'"
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      [ngClass.xs]="'card-mobile-screen'"
+    >
+      <img
+        mat-card-image
+        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+        alt="Photo of a Shiba Inu"
+      />
+    </mat-card>
+    <mat-card [fxFlex]="100 / 3 + '%'" fxFlex.xs="100%" fxFlex.sm="33%">
+      <mat-card-title>Baahubali 2</mat-card-title>
+      <mat-card-subtitle>The Conclusion</mat-card-subtitle>
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz
+          breeds of dog from Japan. A small, agile dog that copes very well with
+          mountainous terrain, the Shiba Inu was originally bred for hunting.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="proceed()" color="accent">
+          Book
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card [fxFlex]="100 / 3 + '%'" fxFlex.xs="100%" fxFlex.sm="33%">
+      <agm-map
+        [ngClass.xs]="'mapNarrowClass'"
+        [latitude]="latitude"
+        [longitude]="longitude"
+      >
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      </agm-map>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-mini-fab><mat-icon>star_outline</mat-icon></button>
+        <button mat-mini-fab><mat-icon>favorite_border</mat-icon></button>
+        <button mat-mini-fab><mat-icon>bookmark_border</mat-icon></button>
+        <button mat-mini-fab><mat-icon>local_offer</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="featured-cast details-row">
+    <div>
+      <h2>
+        Featured Cast & Crew
+      </h2>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="1%" [ngClass.xs]="'mobile-screen'">
+      <div
+        class="cast-card"
+        [fxFlex]="95 / 5 + '%'"
+        fxFlex.xs="49%"
+        *ngFor="let item of [].constructor(5); let i = index"
+      >
+        <mat-card>
+          <img
+            mat-card-image
+            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            alt="Photo of a Shiba Inu"
+          />
+          <mat-card-subtitle>Dog</mat-card-subtitle>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div class="cast details-row"></div>
+  <div class="crew details-row"></div>
+</div>

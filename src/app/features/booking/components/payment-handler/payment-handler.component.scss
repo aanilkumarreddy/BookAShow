@@ -1,0 +1,38 @@
+.payment-handler {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+  mat-card {
+    text-align: justify;
+    mat-card-content {
+      .credit-form {
+        .form-field {
+          width: 100%;
+        }
+        .small-dropdown {
+          width: 100px;
+        }
+        .expiry-date {
+          margin-top: 10px;
+        }
+        margin: 2px;
+        button {
+          width: 100%;
+        }
+      }
+      padding: 25px 10px;
+    }
+  }
+  mat-card {
+    margin: 10px 5px;
+  }
+}
+
+.example-radio-group {
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}

@@ -1,0 +1,24 @@
+<app-filter></app-filter>
+<div>
+  <div fxLayout="row wrap" fxLayoutGap="1%" [ngClass.xs]="'mobile-screen'">
+    <div
+      class="cast-card"
+      [fxFlex]="96 / 4 + '%'"
+      fxFlex.xs="49%"
+      *ngFor="let item of [].constructor(5); let i = index"
+    >
+      <mat-card>
+        <img
+          mat-card-image
+          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-title>Baahubali 2</mat-card-title>
+        <mat-card-subtitle>The Conclusion</mat-card-subtitle>
+        <mat-card-actions>
+          <button mat-raised-button color="accent">Book</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="home-page">
+  <app-filter></app-filter>
+  <mat-tab-group color="accent">
+    <mat-tab label="Now Showing">
+      <ng-template matTabContent>
+        <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div
+            [fxFlex]="100 / gridColumns + '%'"
+            fxFlex.xs="100%"
+            fxFlex.sm="33%"
+            fxFlex.gt-lg="25%"
+            *ngFor="let item of [].constructor(10); let i = index"
+          >
+            <app-movie-card></app-movie-card>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Next Change">
+      <ng-template matTabContent>
+        <div div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div
+            [fxFlex]="100 / gridColumns + '%'"
+            fxFlex.xs="100%"
+            fxFlex.sm="33%"
+            fxFlex.gt-lg="25%"
+            *ngFor="let item of [].constructor(10); let i = index"
+          >
+            <app-movie-card [componentType]="'isShowingNext'"></app-movie-card>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<!--  fxLayout="row wrap"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="32px"
+        fxLayoutAlign="flex-start"
+
+       fxFlex="0 1 calc(33.3% - 32px)"
+            fxFlex.lt-md="0 1 calc(50% - 32px)"
+            fxFlex.lt-sm="100%"
+      -->

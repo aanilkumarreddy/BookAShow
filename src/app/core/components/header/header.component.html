@@ -1,0 +1,72 @@
+<!-- <mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Book A Show</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    (click)="changeTheme()"
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>settings_brightness</mat-icon>
+  </button>
+</mat-toolbar> -->
+
+<mat-toolbar color="primary">
+  <div fxShow="true" fxHide.gt-sm="true">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <a mat-button class="companyName" routerLink="/">
+    <span>Book A Show</span>
+  </a>
+  <span class="example-spacer"></span>
+  <div fxShow="true" fxHide.lt-md="true">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>User Profile</button>
+      <button mat-menu-item>Past Bookings</button>
+      <button mat-menu-item (click)="changeTheme()">
+        Toggle theme
+      </button>
+    </mat-menu>
+    <button mat-raised-button (click)="login()" color="accent">
+      Login
+    </button>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container fxFlexFill class="example-container">
+  <mat-sidenav
+    color="primary"
+    #sidenav
+    fxLayout="column"
+    mode="over"
+    opened="false"
+    fxHide.gt-sm="true"
+  >
+    <div fxLayout="column">
+      <button mat-icon-button class="example-icon">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <button mat-icon-button (click)="changeTheme()" class="example-icon">
+        <mat-icon>settings_brightness</mat-icon>
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

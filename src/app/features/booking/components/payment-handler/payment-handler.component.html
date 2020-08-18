@@ -1,0 +1,121 @@
+<div class="payment-handler">
+  <mat-tab-group mat-stretch-tabs color="accent" class="mat-elevation-z2">
+    <mat-tab label="Credit Card" class="credit-card">
+      <mat-card class="mat-elevation-z2">
+        <mat-card-title>Credit/Debit card</mat-card-title>
+        <mat-card-content>
+          <form class="credit-form" [formGroup]="creditForm">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Credit/Debit card Number</mat-label>
+              <input
+                matInput
+                placeholder="Credit/Debit card Number"
+                maxlength="16"
+                formControlName="cardCode"
+                maxlength="16"
+              />
+              <mat-error>{{
+                (creditForm.get("cardCode").errors || {}).creditCard
+              }}</mat-error>
+            </mat-form-field>
+
+            <div>
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Name on card</mat-label>
+                <input matInput placeholder="Name on Card" />
+              </mat-form-field>
+            </div>
+
+            <div class="expiry-date">Expiry Date</div>
+
+            <div fxLayout="row wrap">
+              <div fxFlex fxFlex.gt-md="20%">
+                <mat-form-field appearance="outline" class="small-dropdown">
+                  <mat-select placeholder="Month">
+                    <mat-option
+                      *ngFor="let item of [].constructor(12); let i = index"
+                      value="i+1"
+                    >
+                      {{ i + 1 }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex fxFlex.gt-md="20%">
+                <mat-form-field appearance="outline" class="small-dropdown">
+                  <mat-select placeholder="Year">
+                    <mat-option *ngFor="let year of years" [value]="year">{{
+                      year
+                    }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex fxFlex.gt-md="15%"></div>
+              <div fxFlex fxFlex.gt-md="20%">
+                <mat-form-field appearance="outline" class="small-dropdown">
+                  <mat-label>cvv</mat-label>
+                  <input
+                    matInput
+                    formControlName="cvv"
+                    placeholder="cvv"
+                    maxlength="4"
+                  />
+                  <mat-error>Enter a valid number</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <button
+              [disabled]="!creditForm.valid"
+              mat-raised-button
+              color="accent"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="UPI">
+      <mat-card>
+        <div>
+          <label id="example-radio-group-label">Pick payment mode</label>
+          <div>
+            <mat-radio-group
+              aria-labelledby="example-radio-group-label"
+              class="example-radio-group"
+              fxLayout="column"
+              fxLayoutAlign="center none"
+              fxFlexFill
+            >
+              <mat-radio-button
+                class="example-radio-button"
+                (change)="radioChange($event)"
+                *ngFor="let item of upis"
+                [value]="item"
+              >
+                {{ item.name }}
+              </mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field *ngIf="showOtherUpiField" appearance="outline">
+              <input matInput />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Net Banking">
+      <mat-card>
+        <mat-form-field appearance="outline">
+          <mat-select>
+            <mat-option
+              *ngFor="let item of [].constructor(3); let i = index"
+              [value]="item"
+              >{{ item }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+</div>

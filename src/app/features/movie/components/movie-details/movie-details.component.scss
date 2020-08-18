@@ -1,0 +1,18 @@
+.movie-details {
+  .mobile-screen {
+    mat-card {
+      margin: 5px !important;
+    }
+  }
+  agm-map {
+    height: 80%;
+  }
+
+  .mapNarrowClass {
+    height: 500px;
+  }
+  margin: 10px 0px;
+  .details-row {
+    margin: 5px 0px;
+  }
+}

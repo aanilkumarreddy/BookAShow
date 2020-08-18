@@ -1,0 +1,141 @@
+<div class="seat-container">
+  <div class="seatLayout">
+    <form class="seating-form" [ngClass.xs]="'mobile-seating'">
+      <ol>
+        <li *ngFor="let seats of rows" class="row row--1">
+          <ol class="seats" type="A">
+            <li *ngFor="let seat of seats" class="seat">
+              <input
+                (click)="seatAction(seat)"
+                type="checkbox"
+                [checked]="seatsLayout?.booked?.includes(seat)"
+                [disabled]="seatsLayout?.disabled?.includes(seat)"
+                [id]="seat"
+              />
+              <label [for]="seat">{{ seat }}</label>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </form>
+    <div class="screen">
+      screen
+    </div>
+  </div>
+
+  <div class="seat-actions">
+    <div class="selected-seats" fxLayout="row wrap">
+      <p class="no-padding">Selected Seats :</p>
+      <span
+        *ngFor="let seatLabel of seatsLayout.booked"
+        class="badge badge-primary"
+        >{{ seatLabel }}</span
+      >
+    </div>
+    <div>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="seatsLayout?.booked?.length == 0"
+        type="button"
+        (click)="bookSeats()"
+      >
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- <div style="text-align: center;"></div>
+
+<div class="seat-container">
+  <h3>
+    Seat Chart Layout
+  </h3>
+  <div class="seatLayout">
+    <div *ngFor="let seatrow of seatmap">
+      <div
+        class="pricing-label"
+        *ngIf="
+          seatChartConfig?.showRowWisePricing &&
+          seatrow.seatPricingInformation != ''
+        "
+      >
+        {{ seatrow.seatPricingInformation }}
+      </div>
+      <div class="seatrow container">
+        <div *ngIf="seatChartConfig?.showRowsLabel">
+          <div class="row-label">{{ seatrow.seatRowLabel }}</div>
+        </div>
+        <div *ngFor="let seatobj of seatrow.seats">
+          <div
+            class="seat-item seat-space"
+            style="color: white; background-color: white;"
+            *ngIf="seatobj.seatLabel == ''"
+          >
+            &nbsp;
+          </div>
+          <div
+            tooltip="Seat : {{ seatobj.seatLabel }} | Price : {{
+              seatobj.price
+            }}Rs"
+            placement="top"
+            [ngClass]="{
+              'seat-item': true,
+              'seat-available': seatobj.status == 'available',
+              'seat-booked': seatobj.status == 'booked',
+              'seat-unavailable': seatobj.status == 'unavailable'
+            }"
+            (click)="selectSeat(seatobj)"
+            *ngIf="
+              (seatobj.status == 'available' || seatobj.status == 'booked') &&
+              seatobj.seatLabel != ''
+            "
+          >
+            {{ seatobj.seatNo }}
+          </div>
+
+          <div
+            tooltip="Seat not available"
+            placement="top"
+            [ngClass]="{ 'seat-item': true, 'seat-unavailable': true }"
+            *ngIf="seatobj.status == 'unavailable' && seatobj.seatLabel != ''"
+          >
+            {{ seatobj.seatNo }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen">
+      Screen
+    </div>
+  </div>
+</div>
+<div class="continaer-fluid">
+  <div class="col-lg-12 summary-bar">
+    <div class="col-lg-4">
+      <div>
+        <h5>Total Selected : {{ cart?.selectedSeats?.length }}</h5>
+        <h5>Total Amount :&nbsp;&nbsp; {{ cart.totalamount }} Rs</h5>
+      </div>
+    </div>
+    <div class="selected-seats">
+      <h5 class="no-padding">Selected Seats :</h5>
+      <span
+        *ngFor="let seatLabel of cart.selectedSeats"
+        class="badge badge-primary"
+        >{{ seatLabel }}</span
+      >
+    </div>
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="cart?.selectedSeats?.length == 0"
+      type="button"
+      (click)="blockSeats('A_1')"
+    >
+      Book Now
+    </button>
+  </div>
+  <div class="col-lg-12 book-area"></div>
+</div> -->
