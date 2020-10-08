@@ -30,13 +30,7 @@
     >
       <mat-icon>invert_colors</mat-icon>
     </button>
-    <button
-      *ngIf="isLoggedIn"
-      mat-icon-button
-      [matMenuTriggerFor]="menu"
-      class="example-icon"
-      aria-label="menu"
-    >
+    <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="menu">
       <mat-icon>account_circle</mat-icon>
     </button>
 
@@ -60,32 +54,14 @@
         Bookings
       </button>
 
-      <button aria-label="switch" mat-menu-item (click)="changeTheme()">
-        Switch Theme
-      </button>
-      <button mat-menu-item aria-label="button" (click)="logout()">
-        Logout
-      </button>
+      <button aria-label="switch" mat-menu-item (click)="changeTheme()">Switch Theme</button>
+      <button mat-menu-item aria-label="button" (click)="logout()">Logout</button>
     </mat-menu>
 
-    <button
-      *ngIf="!isLoggedIn"
-      mat-button
-      (click)="login()"
-      aria-label="button"
-    >
-      Login
-    </button>
+    <button *ngIf="!isLoggedIn" mat-button (click)="login()" aria-label="button">Login</button>
   </div>
-  <button
-    *ngIf="isLoggedIn && !isAdmin"
-    (click)="toggleEndNav()"
-    mat-icon-button
-    aria-label="switch"
-  >
-    <mat-icon [matBadge]="(notifications || []).length" matBadgeColor="accent"
-      >notifications</mat-icon
-    >
+  <button *ngIf="isLoggedIn && !isAdmin" (click)="toggleEndNav()" mat-icon-button aria-label="switch">
+    <mat-icon [matBadge]="(notifications || []).length" matBadgeColor="accent">notifications</mat-icon>
   </button>
 </mat-toolbar>
 <mat-sidenav-container fxFlexFill class="example-container">
@@ -98,9 +74,7 @@
     fxHide.gt-sm="true"
     (click)="sidenav.toggle()"
   >
-    <button mat-menu-item (click)="changeTheme()" aria-label="switch">
-      Switch Theme
-    </button>
+    <button mat-menu-item (click)="changeTheme()" aria-label="switch">Switch Theme</button>
 
     <div *ngIf="isLoggedIn">
       <button
@@ -122,9 +96,7 @@
         Bookings
       </button>
 
-      <button mat-menu-item (click)="logout()" aria-label="button">
-        Logout
-      </button>
+      <button mat-menu-item (click)="logout()" aria-label="button">Logout</button>
     </div>
     <div *ngIf="!isLoggedIn">
       <button mat-menu-item aria-label="button" (click)="login()">Login</button>
@@ -152,10 +124,7 @@
           {{ (alert || {}).body }}
         </mat-card-content>
       </mat-card>
-      <mat-card
-        class="mat-elevation-z2 notify-card"
-        *ngIf="(notifications || []).length === 0"
-      >
+      <mat-card class="mat-elevation-z2 notify-card" *ngIf="(notifications || []).length === 0">
         <mat-card-content> No notifications avialable </mat-card-content>
       </mat-card>
     </div>

@@ -6,13 +6,7 @@ import { LoginService } from './../../../../core/services/login/login.service';
 import { SnackBarService } from './../../../../shared/services/snack-bar/snack-bar.service';
 import { ManualSpinnyService } from './../../../../core/services/manual-spinny/manual-spinny.service';
 import { MovieService } from './../../services/movie-service/movie.service';
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -47,7 +41,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     private fireDatabase: AngularFireDatabase,
     private alertService: AlertService,
     private datePipe: DatePipe,
-    @Inject(PLATFORM_ID) platdormId
+    @Inject(PLATFORM_ID) platdormId,
   ) {
     this.isBrowser = isPlatformBrowser(platdormId);
     this.manualSpinnyService.spin$.next(true);
@@ -58,14 +52,12 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loginSubscription = this.loginService.afAuth.authState.subscribe(
-      (res) => {
-        if (res) {
-          this.userDetails = res;
-          this.getAlertDetails();
-        }
+    this.loginSubscription = this.loginService.afAuth.authState.subscribe((res) => {
+      if (res) {
+        this.userDetails = res;
+        this.getAlertDetails();
       }
-    );
+    });
     if (this.isBrowser) {
       this.shareUrl = window.location.href;
     }
@@ -104,19 +96,18 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   getRating(imdbId): void {
-    this.movieSubscription = this.movieService
-      .getImdbMovieDetails(imdbId)
-      .subscribe(
-        (res) => {
-          this.movieDetailsImdb = res;
-        },
-        (err) => {
-          console.log(err);
-        },
-        () => {
-          this.manualSpinnyService.spin$.next(false);
-        }
-      );
+    this.movieSubscription = this.movieService.getImdbMovieDetails(imdbId).subscribe(
+      (res) => {
+        this.movieDetailsImdb = res;
+      },
+      (err) => {
+        console.log(err);
+        this.manualSpinnyService.spin$.next(false);
+      },
+      () => {
+        this.manualSpinnyService.spin$.next(false);
+      },
+    );
   }
 
   getImagePath(movieDetails): string {

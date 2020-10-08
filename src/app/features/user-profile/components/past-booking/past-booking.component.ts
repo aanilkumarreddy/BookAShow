@@ -3,13 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { ManualSpinnyService } from './../../../../core/services/manual-spinny/manual-spinny.service';
 import { LoginService } from './../../../../core/services/login/login.service';
 import { AngularFireDatabase } from '@angular/fire/database';
-import {
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-past-booking',
@@ -27,7 +21,7 @@ export class PastBookingComponent implements OnInit, OnDestroy {
     private af: AngularFireDatabase,
     private loginService: LoginService,
     private manualSpinnyService: ManualSpinnyService,
-    @Inject(PLATFORM_ID) platformId
+    @Inject(PLATFORM_ID) platformId,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.manualSpinnyService.spin$.next(true);
@@ -46,7 +40,7 @@ export class PastBookingComponent implements OnInit, OnDestroy {
       (err) => {
         console.log(err);
         this.manualSpinnyService.spin$.next(true);
-      }
+      },
     );
   }
 
@@ -60,7 +54,7 @@ export class PastBookingComponent implements OnInit, OnDestroy {
         },
         (err) => {
           console.log(err);
-        }
+        },
       );
   }
 

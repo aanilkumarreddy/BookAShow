@@ -4,19 +4,15 @@
   routerLinkActive="router-link-active"
   [queryParams]="{ movieId: (movieDetails || {}).id }"
 >
-  <img
-    mat-card-image
-    [src]="getImagePath(movieDetails)"
-    [alt]="(movieDetails || {}).title"
-  />
+  <img mat-card-image [src]="getImagePath(movieDetails)" [alt]="(movieDetails || {}).title" />
   <div *ngIf="isBrowser" fxLayout="row" fxLayoutAlign="space-between start">
     {{ (movieDetails || {}).title }}
     <span class="text-icon">
       <mat-icon>location_on</mat-icon>
       {{
         ((movieDetails || {}).theater || {}).distance
-          ? (((movieDetails || {}).theater || {}).distance | number: "1.2-2")
-          : "NA "
+          ? (((movieDetails || {}).theater || {}).distance | number: '1.2-2')
+          : 'NA '
       }}KM
     </span>
   </div>
@@ -70,21 +66,10 @@
     </button>
     <mat-menu #menu="matMenu" xPosition="before">
       <button mat-menu-item>
-        <a
-          mat-button
-          href="{{ 'https://web.whatsapp.com/send?text=' + shareUrl }}"
-          target="_blank"
-        >
-          Whatsapp</a
-        >
+        <a mat-button href="{{ 'https://web.whatsapp.com/send?text=' + shareUrl }}" target="_blank"> Whatsapp</a>
       </button>
       <button mat-menu-item aria-label="button">
-        <a
-          mat-button
-          target="_blank"
-          href="{{
-            'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl
-          }}"
+        <a mat-button target="_blank" href="{{ 'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl }}"
           >Facebook</a
         >
       </button>

@@ -3,10 +3,7 @@
   <mat-tab-group color="accent" class="mat-elevation-z2">
     <mat-tab label="NOW SHOWING">
       <ng-template matTabContent>
-        <div
-          class="no-records"
-          *ngIf="((movieListDataSource || {}).filteredData || []).length < 1"
-        >
+        <div class="no-records" *ngIf="((movieListDataSource || {}).filteredData || []).length < 1">
           No Records Available
         </div>
         <div fxLayout="row wrap" fxLayoutGap="10px grid">
@@ -28,13 +25,7 @@
     </mat-tab>
     <mat-tab label="NEXT CHANGE">
       <ng-template matTabContent>
-        <div
-          *ngIf="
-            ((upcomingMovieDataSource || {}).filteredData || []).length < 1
-          "
-        >
-          No Records Available
-        </div>
+        <div *ngIf="((upcomingMovieDataSource || {}).filteredData || []).length < 1">No Records Available</div>
         <!-- {{ ((upcomingMovieDataSource || {}).filteredData || []).length }} -->
         <div div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
           <div

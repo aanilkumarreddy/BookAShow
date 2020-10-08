@@ -5,12 +5,7 @@
     <mat-card-content>
       <div>
         <div class="btn-icon-right">
-          <button
-            mat-button
-            color="accent"
-            [routerLink]="['/admin/addMovie']"
-            routerLinkActive="router-link-active"
-          >
+          <button mat-button color="accent" [routerLink]="['/admin/addMovie']" routerLinkActive="router-link-active">
             <mat-icon>add</mat-icon>ADD MOVIE
           </button>
         </div>
@@ -18,16 +13,12 @@
           <mat-tab-group color="accent" class="admin-tab">
             <mat-tab label="NOW SHOWING">
               <div *ngFor="let movie of moviesList">
-                <app-admin-movie-card
-                  [movieDetails]="movie"
-                ></app-admin-movie-card>
+                <app-admin-movie-card [movieDetails]="movie"></app-admin-movie-card>
               </div>
             </mat-tab>
             <mat-tab label="UPCOMING">
               <div *ngFor="let movie of upcomingMoviesList">
-                <app-admin-movie-card
-                  [movieDetails]="movie"
-                ></app-admin-movie-card>
+                <app-admin-movie-card [movieDetails]="movie"></app-admin-movie-card>
               </div>
             </mat-tab>
           </mat-tab-group>

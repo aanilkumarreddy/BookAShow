@@ -8,13 +8,7 @@ import { LANGUAGES } from './../../constants/languages.constant';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ManualSpinnyService } from './../../../../core/services/manual-spinny/manual-spinny.service';
 import { MovieService } from './../../services/movie-service/movie.service';
-import {
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -52,29 +46,25 @@ export class HomeComponent implements OnInit, OnDestroy {
     private manualSpinnyService: ManualSpinnyService,
     private fireDatabase: AngularFireDatabase,
     private loginService: LoginService,
-    @Inject(PLATFORM_ID) platformId
+    @Inject(PLATFORM_ID) platformId,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.manualSpinnyService.spin$.next(true);
     this.buildForm();
     this.getCurrentLocation();
     this.checkIfMobile();
-    this.loginSubscription = this.loginService.afAuth.authState.subscribe(
-      (res) => {
-        this.userDetails = res;
-        if (res) {
-          this.getAlertDetails();
-        }
+    this.loginSubscription = this.loginService.afAuth.authState.subscribe((res) => {
+      this.userDetails = res;
+      if (res) {
+        this.getAlertDetails();
       }
-    );
+    });
   }
 
   ngOnInit(): void {
-    this.valueChangesSubscription = this.filterForm.valueChanges
-      .pipe(debounceTime(400))
-      .subscribe((res) => {
-        this.applyFilter();
-      });
+    this.valueChangesSubscription = this.filterForm.valueChanges.pipe(debounceTime(400)).subscribe((res) => {
+      this.applyFilter();
+    });
   }
 
   buildForm(): void {
@@ -145,18 +135,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getDistance(theaterDetails): number | string {
     if (theaterDetails && this.locationDetails) {
-      const location1 = new google.maps.LatLng(
-        theaterDetails.latitude,
-        theaterDetails.longitude
-      );
-      const currentLocation = new google.maps.LatLng(
-        this.locationDetails.lat,
-        this.locationDetails.lng
-      );
-      const distance = google.maps.geometry.spherical.computeDistanceBetween(
-        location1,
-        currentLocation
-      );
+      const location1 = new google.maps.LatLng(theaterDetails.latitude, theaterDetails.longitude);
+      const currentLocation = new google.maps.LatLng(this.locationDetails.lat, this.locationDetails.lng);
+      const distance = google.maps.geometry.spherical.computeDistanceBetween(location1, currentLocation);
       return distance / 1000;
     } else {
       return 'N/A';
@@ -197,16 +178,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       const searchTerms = JSON.parse(filter);
       let distanceFlag = true;
       if (searchTerms.distance) {
-        distanceFlag =
-          ((data || {}).theater || {}).distance <= searchTerms.distance;
+        distanceFlag = ((data || {}).theater || {}).distance <= searchTerms.distance;
       }
       return (
-        ((data || {}).languages || []).some(
-          (c) => ((searchTerms || {}).language || []).indexOf(c) > -1
-        ) &&
-        ((data || {}).genres || []).some(
-          (d) => ((searchTerms || {}).genre || []).indexOf(d) > -1
-        ) &&
+        ((data || {}).languages || []).some((c) => ((searchTerms || {}).language || []).indexOf(c) > -1) &&
+        ((data || {}).genres || []).some((d) => ((searchTerms || {}).genre || []).indexOf(d) > -1) &&
         distanceFlag &&
         this.getState(data, searchTerms.searchText)
       );
@@ -226,18 +202,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getState(data: any, inputValue: string, state = false): boolean {
     for (const value of Object.values(data)) {
-      if (
-        typeof value === 'object' &&
-        value !== null &&
-        Object.keys(value).length > 0 &&
-        state === false
-      ) {
+      if (typeof value === 'object' && value !== null && Object.keys(value).length > 0 && state === false) {
         state = this.getState(value, inputValue, state);
       } else {
         if (state === false) {
-          state = JSON.stringify(value)
-            .toLowerCase()
-            .includes(inputValue.toLowerCase());
+          state = JSON.stringify(value).toLowerCase().includes(inputValue.toLowerCase());
         } else {
           return state;
         }

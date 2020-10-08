@@ -14,12 +14,7 @@ describe('AutoCompleteComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AutoCompleteComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        MaterialModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-      ],
+      imports: [MaterialModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
     }).compileComponents();
   }));
 

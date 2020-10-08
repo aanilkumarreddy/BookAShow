@@ -1,14 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ManualSpinnyService } from './core/services/manual-spinny/manual-spinny.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import {
-  Component,
-  AfterViewInit,
-  HostListener,
-  Inject,
-  PLATFORM_ID,
-  OnInit,
-} from '@angular/core';
+import { Component, AfterViewInit, HostListener, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 
 declare const google: any;
 @Component({
@@ -25,7 +18,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   constructor(
     private overlay: OverlayContainer,
     private manualSpinnyService: ManualSpinnyService,
-    @Inject(PLATFORM_ID) platformId: any
+    @Inject(PLATFORM_ID) platformId: any,
   ) {
     this.manualSpinnyService.spin$.next(true);
     this.isBrowser = isPlatformBrowser(platformId);
@@ -45,11 +38,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   @HostListener('window:scroll')
   checkScroll(): void {
-    const scrollPosition =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0;
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     if (scrollPosition >= this.topPosToStartShowing) {
       this.isShow = true;
     } else {

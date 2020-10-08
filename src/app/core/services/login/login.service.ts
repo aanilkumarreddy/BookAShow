@@ -12,11 +12,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class LoginService {
   isBrowser = false;
-  constructor(
-    public afAuth: AngularFireAuth,
-    public db: AngularFireDatabase,
-    @Inject(PLATFORM_ID) platformId
-  ) {
+  constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase, @Inject(PLATFORM_ID) platformId) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
@@ -90,7 +86,7 @@ export class LoginService {
       (error) => {
         console.log(error);
         return error;
-      }
+      },
     );
   }
 

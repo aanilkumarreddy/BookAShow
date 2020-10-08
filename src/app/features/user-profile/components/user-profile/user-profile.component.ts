@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private manualSpinnyService: ManualSpinnyService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
   ) {
     this.manualSpinnyService.spin$.next(true);
     this.createUserForm();
@@ -35,7 +35,7 @@ export class UserProfileComponent implements OnInit {
       (err) => {
         console.log(err);
         this.manualSpinnyService.spin$.next(false);
-      }
+      },
     );
   }
 
@@ -45,10 +45,7 @@ export class UserProfileComponent implements OnInit {
     this.userForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       name: new FormControl('', Validators.required),
-      mobile: new FormControl(
-        '',
-        Validators.pattern(/^(?!0+$)(?:\(?\+\d{1,3}\)?[- ]?|0)?\d{10}$/)
-      ),
+      mobile: new FormControl('', Validators.pattern(/^(?!0+$)(?:\(?\+\d{1,3}\)?[- ]?|0)?\d{10}$/)),
     });
   }
 
@@ -63,7 +60,7 @@ export class UserProfileComponent implements OnInit {
         (error) => {
           console.log(error);
           this.manualSpinnyService.spin$.next(false);
-        }
+        },
       );
   }
 
@@ -77,10 +74,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   disableFormFields(): void {
-    if (
-      this.userData &&
-      this.userData.providerData[0].providerId === 'google.com'
-    ) {
+    if (this.userData && this.userData.providerData[0].providerId === 'google.com') {
       this.userForm.get('name').disable();
       this.isGoogleUser = true;
     } else {
@@ -108,12 +102,10 @@ export class UserProfileComponent implements OnInit {
     }
     if (this.userForm.get('mobile').dirty) {
       this.manualSpinnyService.spin$.next(true);
-      this.loginService
-        .updateMobileNum(formValue.mobile, this.userData.uid)
-        .then((res) => {
-          this.snackBarService.success('Details Updated successfully');
-          this.manualSpinnyService.spin$.next(false);
-        });
+      this.loginService.updateMobileNum(formValue.mobile, this.userData.uid).then((res) => {
+        this.snackBarService.success('Details Updated successfully');
+        this.manualSpinnyService.spin$.next(false);
+      });
     }
   }
 

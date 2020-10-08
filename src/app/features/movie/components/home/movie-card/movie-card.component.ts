@@ -33,7 +33,7 @@ export class MovieCardComponent implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private snackBarService: SnackBarService,
-    @Inject(PLATFORM_ID) platformId
+    @Inject(PLATFORM_ID) platformId,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -44,10 +44,7 @@ export class MovieCardComponent implements OnInit {
     }
     let url = '';
     if (this.isBrowser) {
-      url =
-        window.location.href.split('?')[0] +
-        '/movieDetail?movieId=' +
-        this.movieDetails.id;
+      url = window.location.href.split('?')[0] + '/movieDetail?movieId=' + this.movieDetails.id;
     }
     this.shareUrl = url;
   }

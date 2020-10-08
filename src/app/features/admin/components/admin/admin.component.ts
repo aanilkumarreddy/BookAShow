@@ -11,10 +11,7 @@ export class AdminComponent implements OnInit {
   moviesList: any[] = [];
   upcomingMoviesList: any[] = [];
 
-  constructor(
-    private movieService: MovieService,
-    private manualSpinnySevice: ManualSpinnyService
-  ) {
+  constructor(private movieService: MovieService, private manualSpinnySevice: ManualSpinnyService) {
     this.manualSpinnySevice.spin$.next(true);
     this.getMoviesList();
   }

@@ -8,57 +8,33 @@
             <div>
               <mat-form-field class="input-field-style" appearance="outline">
                 <mat-label>E-Mail</mat-label>
-                <input
-                  matInput
-                  formControlName="email"
-                  placeholder="E-Mail"
-                  type="email"
-                />
+                <input matInput formControlName="email" placeholder="E-Mail" type="email" />
                 <mat-error>Please enter a valid E-Mail</mat-error>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field class="input-field-style" appearance="outline">
                 <mat-label>Name</mat-label>
-                <input
-                  formControlName="name"
-                  matInput
-                  placeholder="Name"
-                  type="text"
-                />
+                <input formControlName="name" matInput placeholder="Name" type="text" />
                 <mat-error>Please enter Name</mat-error>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field class="input-field-style" appearance="outline">
                 <mat-label>Mobile</mat-label>
-                <input
-                  formControlName="mobile"
-                  matInput
-                  placeholder="Mobile"
-                  type="text"
-                />
+                <input formControlName="mobile" matInput placeholder="Mobile" type="text" />
                 <mat-error>Please enter a valid mobile number</mat-error>
               </mat-form-field>
             </div>
           </form>
-          <a
-            [routerLink]="['/user/reset-password']"
-            routerLinkActive="router-link-active"
-            *ngIf="!isGoogleUser"
-          >
+          <a [routerLink]="['/user/reset-password']" routerLinkActive="router-link-active" *ngIf="!isGoogleUser">
             <span class="reset-pass flt-right"> Reset Password? </span>
           </a>
         </div>
       </mat-card-content>
       <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="end center">
-          <button
-            [disabled]="!userForm.valid"
-            mat-raised-button
-            color="accent"
-            (click)="updateProfile()"
-          >
+          <button [disabled]="!userForm.valid" mat-raised-button color="accent" (click)="updateProfile()">
             UPDATE
           </button>
         </div>

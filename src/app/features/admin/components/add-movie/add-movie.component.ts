@@ -1,9 +1,4 @@
-import {
-  debounceTime,
-  distinctUntilChanged,
-  skipWhile,
-  startWith,
-} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, skipWhile, startWith } from 'rxjs/operators';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -39,7 +34,7 @@ export class AddMovieComponent implements OnInit, OnDestroy {
     private movieWrapperService: MovieWrapperService,
     private movieService: MovieService,
     private location: Location,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
   ) {
     this.buildForm();
   }
@@ -50,7 +45,7 @@ export class AddMovieComponent implements OnInit, OnDestroy {
         startWith(''),
         skipWhile((value) => value === ''),
         debounceTime(500),
-        distinctUntilChanged()
+        distinctUntilChanged(),
       )
       .subscribe((res) => {
         this.searchMovie(res);
@@ -98,9 +93,7 @@ export class AddMovieComponent implements OnInit, OnDestroy {
     this.castForm = this.movieForm.get('castArray') as FormArray;
     this.crewForm = this.movieForm.get('crewArray') as FormArray;
     this.theaterForm = this.movieForm.get('theater') as FormGroup;
-    this.restrictionForm = this.theaterForm.get(
-      'restrictionsArray'
-    ) as FormArray;
+    this.restrictionForm = this.theaterForm.get('restrictionsArray') as FormArray;
   }
 
   getCastForm(): FormGroup {

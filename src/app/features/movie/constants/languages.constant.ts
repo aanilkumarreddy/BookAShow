@@ -1,8 +1,1 @@
-export const LANGUAGES = [
-  'English',
-  'Hindi',
-  'Kannada',
-  'Malayalam',
-  'Tamil',
-  'Telugu',
-];
+export const LANGUAGES = ['English', 'Hindi', 'Kannada', 'Malayalam', 'Tamil', 'Telugu'];

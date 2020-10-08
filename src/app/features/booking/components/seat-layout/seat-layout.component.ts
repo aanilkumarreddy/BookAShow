@@ -31,7 +31,7 @@ export class SeatLayoutComponent implements OnInit, OnDestroy {
     private router: Router,
     private movieService: MovieService,
     private route: ActivatedRoute,
-    private bookingInfoService: BookingInfoService
+    private bookingInfoService: BookingInfoService,
   ) {
     this.createForm();
     this.routerSubscription = this.route.queryParams.subscribe((res) => {
@@ -43,10 +43,7 @@ export class SeatLayoutComponent implements OnInit, OnDestroy {
     const rows = [];
     let seatsInARow = [];
     let seatChar;
-    if (
-      this.seatsLayout !== undefined &&
-      this.seatsLayout.hasOwnProperty('totalRows')
-    ) {
+    if (this.seatsLayout !== undefined && this.seatsLayout.hasOwnProperty('totalRows')) {
       if (this.seatsLayout.seatNaming === 'rowType') {
         for (let row = 0; row < this.seatsLayout.totalRows; row++) {
           for (let seats = 0; seats < this.seatsLayout.seatsPerRow; seats++) {
@@ -60,13 +57,11 @@ export class SeatLayoutComponent implements OnInit, OnDestroy {
     }
     this.rows = rows;
 
-    this.valueChangesSubscription = this.seatForm.valueChanges.subscribe(
-      (res: any) => {
-        if (res.date && res.slot) {
-          this.getBookedSeats(this.movieDetails.theater.bookedSeats);
-        }
+    this.valueChangesSubscription = this.seatForm.valueChanges.subscribe((res: any) => {
+      if (res.date && res.slot) {
+        this.getBookedSeats(this.movieDetails.theater.bookedSeats);
       }
-    );
+    });
   }
 
   createForm(): void {
@@ -108,14 +103,11 @@ export class SeatLayoutComponent implements OnInit, OnDestroy {
   getBookedSeats(bookedSeats: any[]): void {
     const alreadyBookedSeats = bookedSeats.find((res) => {
       return (
-        Date.parse(res.date) ===
-          (this.getFormValue('date') || {}).setHours(0, 0, 0, 0) &&
+        Date.parse(res.date) === (this.getFormValue('date') || {}).setHours(0, 0, 0, 0) &&
         res.slot === this.getFormValue('slot')
       );
     });
-    this.seatsLayout.disabled = alreadyBookedSeats
-      ? alreadyBookedSeats.seats
-      : [];
+    this.seatsLayout.disabled = alreadyBookedSeats ? alreadyBookedSeats.seats : [];
   }
 
   bookSeats(): void {

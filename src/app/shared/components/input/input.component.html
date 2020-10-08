@@ -4,11 +4,6 @@
   appearance="{{ appearance ? appearance : 'outline' }}"
 >
   <mat-label>{{ label }}</mat-label>
-  <input
-    matInput
-    placeholder="{{ placeholder }}"
-    [formControl]="fieldCtrl"
-    type="text"
-  />
+  <input matInput placeholder="{{ placeholder }}" [formControl]="fieldCtrl" type="text" />
   <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
 </mat-form-field>

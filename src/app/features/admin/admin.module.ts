@@ -12,14 +12,7 @@ import { AddMovieComponent } from './components/add-movie/add-movie.component';
 
 @NgModule({
   declarations: [AdminComponent, AdminMovieCardComponent, AddMovieComponent],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    SharedModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, FormsModule, ReactiveFormsModule],
   providers: [DatePipe, MovieWrapperService],
 })
 export class AdminModule {}

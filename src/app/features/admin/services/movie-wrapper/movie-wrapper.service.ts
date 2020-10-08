@@ -8,14 +8,8 @@ export class MovieWrapperService {
 
   createMovieObj(movieForm: FormGroup): any {
     const movieFormValue = movieForm.getRawValue();
-    const fromDate = this.datePipe.transform(
-      ((movieFormValue || {}).theater || {}).startDate,
-      'MM-dd-yyyy'
-    );
-    const toDate = this.datePipe.transform(
-      ((movieFormValue || {}).theater || {}).endDate,
-      'MM-dd-yyyy'
-    );
+    const fromDate = this.datePipe.transform(((movieFormValue || {}).theater || {}).startDate, 'MM-dd-yyyy');
+    const toDate = this.datePipe.transform(((movieFormValue || {}).theater || {}).endDate, 'MM-dd-yyyy');
     let movieName = (movieFormValue || {}).title;
     if (typeof movieName === 'object') {
       movieName = movieName.title;
@@ -38,13 +32,9 @@ export class MovieWrapperService {
         fromDate,
         toDate,
         showTimings: ((movieFormValue || {}).theater || {}).showTimings,
-        restrictions: this.getArrayFromObjs(
-          ((movieFormValue || {}).theater || {}).restrictionsArray,
-          'restriction'
-        ),
+        restrictions: this.getArrayFromObjs(((movieFormValue || {}).theater || {}).restrictionsArray, 'restriction'),
         parking: ((movieFormValue || {}).theater || {}).parking,
-        foodAvailability: ((movieFormValue || {}).theater || {})
-          .foodAvailability,
+        foodAvailability: ((movieFormValue || {}).theater || {}).foodAvailability,
         dolby: ((movieFormValue || {}).theater || {}).dolby,
         fourK: ((movieFormValue || {}).theater || {}).fourK,
       },

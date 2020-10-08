@@ -1,19 +1,10 @@
 <div class="filter-form">
   <form [formGroup]="filterForm">
     <div class="search-bar">
-      <mat-form-field
-        color="accent"
-        [ngClass.xs]="'small-screen'"
-        appearance="outline"
-      >
+      <mat-form-field color="accent" [ngClass.xs]="'small-screen'" appearance="outline">
         <mat-label>Search</mat-label>
         <mat-icon matPrefix>search</mat-icon>
-        <input
-          [formControl]="filterForm.controls.searchText"
-          matInput
-          placeholder="Search"
-          type="search"
-        />
+        <input [formControl]="filterForm.controls.searchText" matInput placeholder="Search" type="search" />
       </mat-form-field>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="15px">

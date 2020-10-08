@@ -7,12 +7,7 @@ import { PaymentService } from './../../services/payment-service/payment.service
 import { BANKING_NAMES } from './../../constants/banking-name.constant';
 import { BookingInfoService } from './../../services/booking-info/booking-info.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  Validators,
-  FormControl,
-  ValidationErrors,
-} from '@angular/forms';
+import { FormGroup, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -30,24 +25,7 @@ export class PaymentHandlerComponent implements OnInit, OnDestroy {
   bankingList = BANKING_NAMES;
   pastBookings: any[];
   movieDetails: any;
-  years = [
-    2020,
-    2021,
-    2022,
-    2023,
-    2024,
-    2025,
-    2026,
-    2027,
-    2028,
-    2029,
-    2030,
-    2031,
-    2032,
-    2033,
-    2034,
-    2035,
-  ];
+  years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035];
 
   upis = [
     {
@@ -79,7 +57,7 @@ export class PaymentHandlerComponent implements OnInit, OnDestroy {
     private movieService: MovieService,
     private datePipe: DatePipe,
     private manualSpinnyService: ManualSpinnyService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
   ) {
     this.manualSpinnyService.spin$.next(true);
     this.buildForm();
@@ -94,10 +72,7 @@ export class PaymentHandlerComponent implements OnInit, OnDestroy {
   buildForm(): void {
     this.paymentForm = new FormGroup({
       creditForm: new FormGroup({
-        cvv: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^[0-9]{3,4}$/),
-        ]),
+        cvv: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{3,4}$/)]),
         cardCode: new FormControl('', this.validateCreditCard),
         month: new FormControl('', Validators.required),
         year: new FormControl('', Validators.required),
@@ -126,7 +101,7 @@ export class PaymentHandlerComponent implements OnInit, OnDestroy {
       },
       (err) => {
         console.log(err);
-      }
+      },
     );
   }
 
@@ -161,24 +136,17 @@ export class PaymentHandlerComponent implements OnInit, OnDestroy {
         },
         (err) => {
           this.pastBookings = [];
-        }
+        },
       );
   }
 
   validateCreditCard(control: FormControl): ValidationErrors {
     let result: ValidationErrors;
     const value = control.value || '';
-    if (
-      !(
-        value.startsWith('37') ||
-        value.startsWith('4') ||
-        value.startsWith('5')
-      )
-    ) {
+    if (!(value.startsWith('37') || value.startsWith('4') || value.startsWith('5'))) {
       // Return error if card is not Amex, Visa or Mastercard
       result = {
-        creditCard:
-          'Credit/Debit ard number is not from a supported credit card provider',
+        creditCard: 'Credit/Debit ard number is not from a supported credit card provider',
       };
     } else if (value.length !== 16) {
       // Return error if length is not 16 digits
@@ -212,10 +180,7 @@ export class PaymentHandlerComponent implements OnInit, OnDestroy {
     const newBooking = {
       movieId: this.bookingInfo.movieId,
       bookedSeats: this.bookingInfo.bookedSeats,
-      bookedFor: this.datePipe.transform(
-        this.bookingInfo.bookedFor,
-        'MM-dd-yyyy'
-      ),
+      bookedFor: this.datePipe.transform(this.bookingInfo.bookedFor, 'MM-dd-yyyy'),
       slotTime: this.bookingInfo.slotTime,
       price: this.bookingInfo.price,
       theater: this.bookingInfo.theater,
@@ -238,10 +203,7 @@ export class PaymentHandlerComponent implements OnInit, OnDestroy {
   }
 
   disableSeats(): void {
-    const dateFormat = this.datePipe.transform(
-      this.bookingInfo.bookedFor,
-      'MM-dd-yyyy'
-    );
+    const dateFormat = this.datePipe.transform(this.bookingInfo.bookedFor, 'MM-dd-yyyy');
     const slotTime = this.bookingInfo.slotTime;
     const details = this.movieDetails.theater.bookedSeats || [];
     const currentSeatDetails = details.find((val) => {

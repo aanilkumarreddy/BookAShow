@@ -1,32 +1,18 @@
 import { SnackBarService } from './../../shared/services/snack-bar/snack-bar.service';
 import { LoginService } from './../services/login/login.service';
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router,
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private loginService: LoginService,
-    private router: Router,
-    private snackBarService: SnackBarService
-  ) {}
+  constructor(private loginService: LoginService, private router: Router, private snackBarService: SnackBarService) {}
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+    state: RouterStateSnapshot,
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     this.loginService.afAuth.authState.subscribe((res) => {
       if (res) {
         return true;

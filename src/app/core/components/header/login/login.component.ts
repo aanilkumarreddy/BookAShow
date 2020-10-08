@@ -1,12 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -29,7 +24,7 @@ export class LoginComponent implements OnInit {
     private snackBarService: SnackBarService,
     private router: Router,
     private manualSpinnyService: ManualSpinnyService,
-    @Inject(PLATFORM_ID) platformId
+    @Inject(PLATFORM_ID) platformId,
   ) {
     this.createLoginForm();
     this.createSignUpForm();
@@ -50,40 +45,20 @@ export class LoginComponent implements OnInit {
       {
         name: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(15),
-          ],
-        ],
-        confirmPassword: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(15),
-          ],
-        ],
+        password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
       },
       {
         validator: this.ConfirmPasswordValidator('password', 'confirmPassword'),
-      }
+      },
     );
   }
 
-  ConfirmPasswordValidator(
-    controlName: string,
-    matchingControlName: string
-  ): any {
+  ConfirmPasswordValidator(controlName: string, matchingControlName: string): any {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
-      if (
-        matchingControl.errors &&
-        !matchingControl.errors.confirmPasswordValidator
-      ) {
+      if (matchingControl.errors && !matchingControl.errors.confirmPasswordValidator) {
         return;
       }
       if (control.value !== matchingControl.value) {
@@ -112,17 +87,15 @@ export class LoginComponent implements OnInit {
   signUp(): void {
     this.manualSpinnyService.spin$.next(true);
     const formValue = this.signUpForm.getRawValue();
-    this.loginService
-      .signupWithEmail(formValue.email, formValue.password, formValue.name)
-      .then((res) => {
-        this.manualSpinnyService.spin$.next(false);
-        if ((res || {}).code) {
-          this.snackBarService.error(res.message);
-        } else {
-          this.snackBarService.success('Signup completed Successfully');
-          this.dialogRef.close();
-        }
-      });
+    this.loginService.signupWithEmail(formValue.email, formValue.password, formValue.name).then((res) => {
+      this.manualSpinnyService.spin$.next(false);
+      if ((res || {}).code) {
+        this.snackBarService.error(res.message);
+      } else {
+        this.snackBarService.success('Signup completed Successfully');
+        this.dialogRef.close();
+      }
+    });
   }
 
   loginWithEmail(): void {
@@ -137,16 +110,14 @@ export class LoginComponent implements OnInit {
       }
       this.manualSpinnyService.spin$.next(false);
     } else {
-      this.loginService
-        .loginWithEmail(formValue.email, formValue.password)
-        .then((res) => {
-          this.manualSpinnyService.spin$.next(false);
-          if ((res || {}).code) {
-            this.snackBarService.error(res.message);
-          } else {
-            this.dialogRef.close();
-          }
-        });
+      this.loginService.loginWithEmail(formValue.email, formValue.password).then((res) => {
+        this.manualSpinnyService.spin$.next(false);
+        if ((res || {}).code) {
+          this.snackBarService.error(res.message);
+        } else {
+          this.dialogRef.close();
+        }
+      });
     }
   }
 

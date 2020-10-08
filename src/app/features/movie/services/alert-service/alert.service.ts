@@ -17,7 +17,7 @@ export class AlertService {
     private angularFireDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
     private angularFireMessaging: AngularFireMessaging,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     // this.angularFireMessaging.messages.subscribe((messaging: any) => {
     //   messaging.onMessage = messaging.onMessage.bind(messaging);
@@ -67,15 +67,11 @@ export class AlertService {
       },
       (err) => {
         console.error('Unable to get permission to notify.', err);
-      }
+      },
     );
   }
 
-  sendPushNotification(
-    title: string,
-    message: string,
-    redirectTo: string
-  ): void {
+  sendPushNotification(title: string, message: string, redirectTo: string): void {
     const data = {
       notification: {
         title,
@@ -96,7 +92,7 @@ export class AlertService {
         headers: new HttpHeaders()
           .set(
             'Authorization',
-            'key=AAAA4uQosH4:APA91bEWlZgTigv--wCCaAzZgEi1bKEeEC1Dga1nWinWVvq6OU_S6c_JiARfLv9Pf8_HRuyBYdOFbHJHKRmSyvqVNpQlKnS1toSwpzoG8YYpfaB4YDlhLvJmZ9S8oeB102xxGAARQj0b'
+            'key=AAAA4uQosH4:APA91bEWlZgTigv--wCCaAzZgEi1bKEeEC1Dga1nWinWVvq6OU_S6c_JiARfLv9Pf8_HRuyBYdOFbHJHKRmSyvqVNpQlKnS1toSwpzoG8YYpfaB4YDlhLvJmZ9S8oeB102xxGAARQj0b',
           )
           .set('Content-Type', 'application/json'),
       })
@@ -105,7 +101,7 @@ export class AlertService {
         (error) => {
           console.log(error);
           console.log('error' + error);
-        }
+        },
       );
   }
 }

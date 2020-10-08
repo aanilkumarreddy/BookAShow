@@ -24,12 +24,6 @@ import { AutoCompleteComponent } from './components/auto-complete/auto-complete.
     FormsModule,
     ReactiveFormsModule,
   ],
-  exports: [
-    FlexLayoutModule,
-    AgmCoreModule,
-    ChipListComponent,
-    InputComponent,
-    AutoCompleteComponent,
-  ],
+  exports: [FlexLayoutModule, AgmCoreModule, ChipListComponent, InputComponent, AutoCompleteComponent],
 })
 export class SharedModule {}

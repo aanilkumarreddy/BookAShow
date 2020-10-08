@@ -18,7 +18,7 @@ export class ForgotPasswordComponent implements OnInit {
     private loginService: LoginService,
     private snackBarService: SnackBarService,
     private router: Router,
-    private manualSpinnyService: ManualSpinnyService
+    private manualSpinnyService: ManualSpinnyService,
   ) {
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -35,9 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.snackBarService.success('Password Reset Mail sent to ' + email);
         this.router.navigateByUrl('/home');
       } else {
-        this.snackBarService.error(
-          'No User found for ' + email + '. Please signup to Continue.'
-        );
+        this.snackBarService.error('No User found for ' + email + '. Please signup to Continue.');
       }
       this.manualSpinnyService.spin$.next(false);
     });

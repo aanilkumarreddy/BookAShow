@@ -7,10 +7,7 @@ export class ResetPasswordService {
   constructor() {}
 
   reauthenticateUser(userObj, email, password): any {
-    const credential = firebase.auth.EmailAuthProvider.credential(
-      email,
-      password
-    );
+    const credential = firebase.auth.EmailAuthProvider.credential(email, password);
     return userObj
       .reauthenticateWithCredential(credential)
       .then((res) => {

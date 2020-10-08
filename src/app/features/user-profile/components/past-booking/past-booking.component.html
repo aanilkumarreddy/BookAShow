@@ -8,9 +8,7 @@
           <mat-tab-group color="accent" class="bookings-tab">
             <mat-tab label="CURRENT BOOKINGS">
               <div *ngFor="let bookingDetail of currentBookings">
-                <app-past-booking-card
-                  [bookingDetails]="bookingDetail"
-                ></app-past-booking-card>
+                <app-past-booking-card [bookingDetails]="bookingDetail"></app-past-booking-card>
               </div>
               <div *ngIf="(currentBookings || []).length < 1">
                 <span>
@@ -20,9 +18,7 @@
             </mat-tab>
             <mat-tab label="PAST BOOKINGS">
               <div *ngFor="let bookingDetail of pastBookings">
-                <app-past-booking-card
-                  [bookingDetails]="bookingDetail"
-                ></app-past-booking-card>
+                <app-past-booking-card [bookingDetails]="bookingDetail"></app-past-booking-card>
               </div>
               <div *ngIf="(currentBookings || []).length < 1">
                 <span>

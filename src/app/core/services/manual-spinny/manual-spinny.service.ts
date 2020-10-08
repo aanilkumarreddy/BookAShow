@@ -45,11 +45,7 @@ export class ManualSpinnyService {
     return this.overlay.create({
       hasBackdrop: true,
       backdropClass: 'dark-backdrop',
-      positionStrategy: this.overlay
-        .position()
-        .global()
-        .centerHorizontally()
-        .centerVertically(),
+      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
       // panelClass: 'custom-overlay',
     });
   }

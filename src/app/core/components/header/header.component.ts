@@ -1,16 +1,7 @@
 import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  ViewChild,
-  PLATFORM_ID,
-  Inject,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, PLATFORM_ID, Inject, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 
@@ -47,7 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private fireDb: AngularFireDatabase,
     private alertService: AlertService,
     private datePipe: DatePipe,
-    @Inject(PLATFORM_ID) platformId: any
+    @Inject(PLATFORM_ID) platformId: any,
   ) {
     this.manulaSpinnyService.spin$.next(true);
     this.isBrowser = isPlatformBrowser(platformId);
@@ -56,13 +47,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.alertService.receiveMessage();
-    this.alertSubscription = this.alertService.currentMessage.subscribe(
-      (res) => {
-        if ((res || {}).notification) {
-          this.notifications.push(res.notification);
-        }
+    this.alertSubscription = this.alertService.currentMessage.subscribe((res) => {
+      if ((res || {}).notification) {
+        this.notifications.push(res.notification);
       }
-    );
+    });
   }
 
   checkAuthState(): void {
@@ -80,12 +69,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       },
       () => {
         this.manulaSpinnyService.spin$.next(false);
-      }
+      },
     );
-    if (
-      this.isBrowser &&
-      sessionStorage.getItem('isLoggedIn') === 'admin@admin.com'
-    ) {
+    if (this.isBrowser && sessionStorage.getItem('isLoggedIn') === 'admin@admin.com') {
       this.loggedIn('admin@admin.com');
       this.isAdmin = true;
     }
@@ -159,11 +145,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   sendPushMsg(movieName, movieId, url): void {
-    this.alertService.sendPushNotification(
-      movieName,
-      'Reminder about ' + movieName,
-      url
-    );
+    this.alertService.sendPushNotification(movieName, 'Reminder about ' + movieName, url);
   }
 
   navigateTo(url): void {

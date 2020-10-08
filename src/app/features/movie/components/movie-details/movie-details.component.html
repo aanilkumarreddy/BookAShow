@@ -1,73 +1,36 @@
 <div class="movie-details" *ngIf="movieDetailsLoaded">
-  <div
-    class="details-row"
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    [ngClass.xs]="'mobile-screen'"
-    fxLayoutGap="5px"
-  >
-    <mat-card
-      [fxFlex]="99 / 3 + '%'"
-      fxFlex.xs="99%"
-      fxFlex.sm="32%"
-      [ngClass.xs]="'card-mobile-screen'"
-    >
-      <img
-        mat-card-image
-        [src]="getImagePath(movieDetails)"
-        alt="(movieDetails||{}).title"
-      />
+  <div class="details-row" fxLayout="row wrap" fxLayout.xs="column" [ngClass.xs]="'mobile-screen'" fxLayoutGap="5px">
+    <mat-card [fxFlex]="99 / 3 + '%'" fxFlex.xs="99%" fxFlex.sm="32%" [ngClass.xs]="'card-mobile-screen'">
+      <img mat-card-image [src]="getImagePath(movieDetails)" alt="(movieDetails||{}).title" />
     </mat-card>
     <mat-card [fxFlex]="99 / 3 + '%'" fxFlex.xs="99%" fxFlex.sm="32%">
       <mat-card-title
         >{{ (movieDetails || {}).title }}
-        {{
-          (movieDetailsImdb || {}).original_title
-            ? "(" + (movieDetailsImdb || {}).original_title + ")"
-            : ""
-        }}
+        {{ (movieDetailsImdb || {}).original_title ? '(' + (movieDetailsImdb || {}).original_title + ')' : '' }}
       </mat-card-title>
-      <mat-card-subtitle>{{
-        (movieDetails || {}).sub_title
-      }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ (movieDetails || {}).sub_title }}</mat-card-subtitle>
       <mat-card-content>
         <p>
           {{ (movieDetails || {}).story }}
         </p>
 
-        <div
-          fxLayout="row wrap"
-          fxLayoutAlign="space-evenly center"
-          class="statistics"
-        >
+        <div fxLayout="row wrap" fxLayoutAlign="space-evenly center" class="statistics">
           <div fxLayout="column">
             <div>Vote Average</div>
             <div>
-              {{
-                (movieDetailsImdb || {}).vote_average
-                  ? (movieDetailsImdb || {}).vote_average
-                  : "N/A"
-              }}
+              {{ (movieDetailsImdb || {}).vote_average ? (movieDetailsImdb || {}).vote_average : 'N/A' }}
             </div>
           </div>
           <div fxLayout="column">
             <div>Vote Count</div>
             <div>
-              {{
-                (movieDetailsImdb || {}).vote_count
-                  ? (movieDetailsImdb || {}).vote_count
-                  : "N/A"
-              }}
+              {{ (movieDetailsImdb || {}).vote_count ? (movieDetailsImdb || {}).vote_count : 'N/A' }}
             </div>
           </div>
           <div fxLayout="column">
             <div>Popularity</div>
             <div>
-              {{
-                (movieDetailsImdb || {}).popularity
-                  ? (movieDetailsImdb || {}).popularity
-                  : "N/A"
-              }}
+              {{ (movieDetailsImdb || {}).popularity ? (movieDetailsImdb || {}).popularity : 'N/A' }}
             </div>
           </div>
         </div>
@@ -80,14 +43,7 @@
         >
           <button mat-flat-button class="imdb-btn">IMDB</button>
         </a>
-        <button
-          class="flt-right"
-          mat-raised-button
-          (click)="proceed()"
-          color="accent"
-        >
-          BOOK
-        </button>
+        <button class="flt-right" mat-raised-button (click)="proceed()" color="accent">BOOK</button>
       </mat-card-actions>
     </mat-card>
     <mat-card [fxFlex]="99 / 3 + '%'" fxFlex.xs="99%" fxFlex.sm="32%">
@@ -123,40 +79,19 @@
         <div>
           <mat-menu #menu="matMenu" xPosition="before">
             <button mat-menu-item>
-              <a
-                mat-button
-                href="{{ 'https://web.whatsapp.com/send?text=' + shareUrl }}"
-                target="_blank"
-              >
-                Whatsapp</a
-              >
+              <a mat-button href="{{ 'https://web.whatsapp.com/send?text=' + shareUrl }}" target="_blank"> Whatsapp</a>
             </button>
             <button mat-menu-item>
-              <a
-                mat-button
-                target="_blank"
-                href="{{
-                  'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl
-                }}"
+              <a mat-button target="_blank" href="{{ 'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl }}"
                 >Facebook</a
               >
             </button>
           </mat-menu>
-          <button
-            [matMenuTriggerFor]="menu"
-            color="accent"
-            mat-mini-fab
-            *ngIf="!isMobile"
-          >
+          <button [matMenuTriggerFor]="menu" color="accent" mat-mini-fab *ngIf="!isMobile">
             <mat-icon>share</mat-icon>
           </button>
 
-          <button
-            (click)="shareMovie(movieDetails)"
-            color="accent"
-            mat-mini-fab
-            *ngIf="isMobile"
-          >
+          <button (click)="shareMovie(movieDetails)" color="accent" mat-mini-fab *ngIf="isMobile">
             <mat-icon>share</mat-icon>
           </button>
         </div>
@@ -168,23 +103,11 @@
       <h2>Cast</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="1%" [ngClass.xs]="'mobile-screen'">
-      <div
-        class="cast-card"
-        [fxFlex]="95 / 5 + '%'"
-        fxFlex.xs="49%"
-        *ngFor="let cast of (movieDetails || {}).cast"
-      >
+      <div class="cast-card" [fxFlex]="95 / 5 + '%'" fxFlex.xs="49%" *ngFor="let cast of (movieDetails || {}).cast">
         <mat-card>
-          <img
-            mat-card-image
-            src="../../../../../../../assets/images/img_not.png"
-            alt=""
-          />
+          <img mat-card-image src="../../../../../../../assets/images/img_not.png" alt="" />
           <mat-card-subtitle
-            >{{ cast.name }}
-            {{
-              cast.character_name ? "As " + cast.character_name : ""
-            }}</mat-card-subtitle
+            >{{ cast.name }} {{ cast.character_name ? 'As ' + cast.character_name : '' }}</mat-card-subtitle
           >
         </mat-card>
       </div>
@@ -194,27 +117,11 @@
     <div class="details-subtitle">
       <h2>Crew</h2>
     </div>
-    <div
-      fxLayout="row"
-      [ngClass.xs]="'mobile-screen-crew'"
-      fxLayoutAlign="start start"
-      fxLayoutGap="1%"
-    >
-      <div
-        class="cast-card"
-        [fxFlex]="95 / 5 + '%'"
-        fxFlex.xs="55%"
-        *ngFor="let crew of (movieDetails || {}).crew"
-      >
+    <div fxLayout="row" [ngClass.xs]="'mobile-screen-crew'" fxLayoutAlign="start start" fxLayoutGap="1%">
+      <div class="cast-card" [fxFlex]="95 / 5 + '%'" fxFlex.xs="55%" *ngFor="let crew of (movieDetails || {}).crew">
         <mat-card>
-          <img
-            mat-card-image
-            src="../../../../../../../assets/images/img_not.png"
-            alt="crew"
-          />
-          <mat-card-subtitle
-            >{{ crew.role }} - {{ crew.name }}</mat-card-subtitle
-          >
+          <img mat-card-image src="../../../../../../../assets/images/img_not.png" alt="crew" />
+          <mat-card-subtitle>{{ crew.role }} - {{ crew.name }}</mat-card-subtitle>
         </mat-card>
       </div>
     </div>

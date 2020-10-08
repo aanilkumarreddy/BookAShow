@@ -1,57 +1,26 @@
 <div>
-  <mat-tab-group
-    mat-stretch-tabs
-    color="accent"
-    class="example-stretched-tabs mat-elevation-z1"
-  >
+  <mat-tab-group mat-stretch-tabs color="accent" class="example-stretched-tabs mat-elevation-z1">
     <mat-tab label="LOGIN">
       <div class="mat-tab-body-margin login">
         <div>
           <form [formGroup]="loginForm" fxLayout="column">
             <mat-form-field appearance="outline">
               <mat-label>E-mail</mat-label>
-              <input
-                matInput
-                placeholder="E-mail"
-                type="email"
-                formControlName="email"
-              />
+              <input matInput placeholder="E-mail" type="email" formControlName="email" />
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
 
-              <input
-                type="password"
-                matInput
-                placeholder="Password"
-                formControlName="password"
-              />
+              <input type="password" matInput placeholder="Password" formControlName="password" />
             </mat-form-field>
-            <a
-              [routerLink]="['/user/forgot-password']"
-              routerLinkActive="router-link-active"
-              (click)="closeDialog()"
-            >
-              <span color="warn" class="forgot-pass flt-right">
-                Forgot Password?
-              </span>
+            <a [routerLink]="['/user/forgot-password']" routerLinkActive="router-link-active" (click)="closeDialog()">
+              <span color="warn" class="forgot-pass flt-right"> Forgot Password? </span>
             </a>
-            <button
-              mat-raised-button
-              class="login-btns"
-              (click)="loginWithEmail()"
-              color="accent"
-            >
-              LOGIN
-            </button>
+            <button mat-raised-button class="login-btns" (click)="loginWithEmail()" color="accent">LOGIN</button>
             <div class="btn-text">
               <span> or</span>
             </div>
-            <button
-              class="login-btns google-btn"
-              mat-raised-button
-              (click)="googleLogin()"
-            >
+            <button class="login-btns google-btn" mat-raised-button (click)="googleLogin()">
               <img src="../../../../../assets/images/google.png" alt="google" />
               Sign In With Google
             </button>
@@ -64,54 +33,27 @@
         <form [formGroup]="signUpForm" fxLayout="column">
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input
-              formControlName="name"
-              type="text"
-              matInput
-              placeholder="Name"
-            />
+            <input formControlName="name" type="text" matInput placeholder="Name" />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>E-Mail</mat-label>
 
-            <input
-              matInput
-              type="email"
-              formControlName="email"
-              placeholder="testEmail@gmail.com"
-            />
+            <input matInput type="email" formControlName="email" placeholder="testEmail@gmail.com" />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
 
-            <input
-              placeholder="Password"
-              matInput
-              formControlName="password"
-              type="password"
-            />
+            <input placeholder="Password" matInput formControlName="password" type="password" />
             <mat-hint> password must contain between 6-15 characters </mat-hint>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Re-Enter Password</mat-label>
 
-            <input
-              matInput
-              type="password"
-              formControlName="confirmPassword"
-              placeholder="Re-Enter Password"
-            />
+            <input matInput type="password" formControlName="confirmPassword" placeholder="Re-Enter Password" />
             <mat-error>Confirm password must be same as password</mat-error>
           </mat-form-field>
-          <button
-            [disabled]="!signUpForm.valid"
-            mat-raised-button
-            (click)="signUp()"
-            color="accent"
-          >
-            SIGNUP
-          </button>
+          <button [disabled]="!signUpForm.valid" mat-raised-button (click)="signUp()" color="accent">SIGNUP</button>
         </form>
       </div>
     </mat-tab>

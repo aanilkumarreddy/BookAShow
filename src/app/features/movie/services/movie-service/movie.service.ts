@@ -39,7 +39,7 @@ export class MovieService {
           },
           (err) => {
             reject(err);
-          }
+          },
         );
       });
     } else {
@@ -57,18 +57,13 @@ export class MovieService {
         },
         (err) => {
           console.log(err);
-        }
-      )
+        },
+      ),
     );
   }
 
   searchMovie(query: string): Promise<any> {
-    const searchUrl =
-      this.searchUrl +
-      '?api_key=' +
-      this.apiKey +
-      '&language=undefined&query=' +
-      query;
+    const searchUrl = this.searchUrl + '?api_key=' + this.apiKey + '&language=undefined&query=' + query;
     return this.httpClient.get(searchUrl).toPromise();
   }
 }

@@ -1,13 +1,6 @@
 <mat-card class="cv-card closed mat-elevation-z2">
   <span class="cv-thumbnail">
-    <img
-      src="{{
-        '../../../../../../../../assets/images/' +
-          (movieDetails || {}).poster_url
-      }}"
-      width="100px"
-      alt=""
-    />
+    <img src="{{ '../../../../../../../../assets/images/' + (movieDetails || {}).poster_url }}" width="100px" alt="" />
     <span class="vertical-divider"></span>
   </span>
 
@@ -33,12 +26,10 @@
     </div>
     <div class="theater-details">
       <div class="mt-5">
-        <span>Theater Name :</span
-        ><span>{{ ((bookingDetails || {}).theater || {}).name }}</span>
+        <span>Theater Name :</span><span>{{ ((bookingDetails || {}).theater || {}).name }}</span>
       </div>
       <div class="mt-5">
-        <span>Address:</span
-        ><span>{{ ((bookingDetails || {}).theater || {}).address }}</span>
+        <span>Address:</span><span>{{ ((bookingDetails || {}).theater || {}).address }}</span>
       </div>
     </div>
     <div class="mt-5">
@@ -50,22 +41,13 @@
     <div class="mt-5">
       Selected seats :
 
-      <span
-        class="seat"
-        *ngFor="let seat of (bookingDetails || {}).bookedSeats"
-      >
+      <span class="seat" *ngFor="let seat of (bookingDetails || {}).bookedSeats">
         {{ seat }}
       </span>
     </div>
   </mat-card-content>
 
-  <button
-    mat-icon-button
-    type="button"
-    class="toggle-details"
-    color="accent"
-    (click)="toggleDetails($event)"
-  >
+  <button mat-icon-button type="button" class="toggle-details" color="accent" (click)="toggleDetails($event)">
     <mat-icon aria-label="switch"></mat-icon>
   </button>
   <mat-card-actions>

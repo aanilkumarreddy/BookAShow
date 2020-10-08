@@ -20,14 +20,7 @@ import { MaterialModule } from './../../core/material-module/material.module';
     PastBookingCardComponent,
     ResetPasswordComponent,
   ],
-  imports: [
-    CommonModule,
-    UserProfileRoutingModule,
-    MaterialModule,
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, UserProfileRoutingModule, MaterialModule, FlexLayoutModule, FormsModule, ReactiveFormsModule],
   providers: [ResetPasswordService],
 })
 export class UserProfileModule {}

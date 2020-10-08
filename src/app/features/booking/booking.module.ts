@@ -11,14 +11,7 @@ import { PaymentService } from './services/payment-service/payment.service';
 import { BookingInfoService } from './services/booking-info/booking-info.service';
 @NgModule({
   declarations: [SeatLayoutComponent, PaymentHandlerComponent],
-  imports: [
-    CommonModule,
-    BookingRoutingModule,
-    SharedModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, BookingRoutingModule, SharedModule, MaterialModule, FormsModule, ReactiveFormsModule],
   providers: [DatePipe, PaymentService, BookingInfoService],
 })
 export class BookingModule {}
