@@ -161,7 +161,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   sendPushMsg(movieName, movieId, url): void {
     this.alertService.sendPushNotification(
       movieName,
-      'Releasing today in Theater',
+      'Reminder about ' + movieName,
       url
     );
   }

@@ -19,7 +19,6 @@ import {
 export class PastBookingComponent implements OnInit, OnDestroy {
   pastBookings = [];
   currentBookings = [];
-  bookings = [];
   isBrowser = false;
   loginSubscription: Subscription;
   fireSubscription: Subscription;
@@ -66,21 +65,13 @@ export class PastBookingComponent implements OnInit, OnDestroy {
   }
 
   parseBookings(bookingDetails): void {
-    const pastBookings = [];
-    const currentBookings = [];
     (bookingDetails || []).forEach((booking) => {
       if (new Date(booking.bookedFor) < new Date()) {
-        pastBookings.push(booking);
+        this.pastBookings.push(booking);
       } else {
-        currentBookings.push(booking);
+        this.currentBookings.push(booking);
       }
     });
-    this.bookings = pastBookings;
-    if (this.isBrowser) {
-      if (window.location.href.includes('current-bookings')) {
-        this.bookings = currentBookings;
-      }
-    }
     this.manualSpinnyService.spin$.next(false);
   }
 

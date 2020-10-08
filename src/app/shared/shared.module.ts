@@ -1,9 +1,10 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './../core/material-module/material.module';
 import { AgmCoreModule } from '@agm/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { MaterialModule } from './../core/material-module/material.module';
 import { ChipListComponent } from './components/chip-list/chip-list.component';
 import { InputComponent } from './components/input/input.component';
 import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';

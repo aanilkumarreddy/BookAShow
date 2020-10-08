@@ -22,12 +22,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'past-bookings',
-    component: PastBookingComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'current-bookings',
+    path: 'bookings',
     component: PastBookingComponent,
     canActivate: [AuthGuard],
   },

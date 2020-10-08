@@ -53,20 +53,11 @@
       <button
         *ngIf="!isAdmin"
         mat-menu-item
-        [routerLink]="['/user/current-bookings']"
+        [routerLink]="['/user/bookings']"
         routerLinkActive="router-link-active"
         aria-label="navigation"
       >
-        Current Bookings
-      </button>
-      <button
-        *ngIf="!isAdmin"
-        mat-menu-item
-        [routerLink]="['/user/past-bookings']"
-        routerLinkActive="router-link-active"
-        aria-label="navigation"
-      >
-        Past Bookings
+        Bookings
       </button>
 
       <button aria-label="switch" mat-menu-item (click)="changeTheme()">
@@ -124,21 +115,13 @@
       <button
         *ngIf="!isAdmin"
         mat-menu-item
-        [routerLink]="['/user/current-bookings']"
+        [routerLink]="['/user/bookings']"
         routerLinkActive="router-link-active"
         aria-label="navigation"
       >
-        Current Bookings
+        Bookings
       </button>
-      <button
-        *ngIf="!isAdmin"
-        mat-menu-item
-        [routerLink]="['/user/pastbookings']"
-        routerLinkActive="router-link-active"
-        aria-label="navigation"
-      >
-        Past Bookings
-      </button>
+
       <button mat-menu-item (click)="logout()" aria-label="button">
         Logout
       </button>

@@ -1,13 +1,12 @@
-.past-booking {
-  .past-flex-col {
-    .past-booking-card {
-      width: 70%;
+.bookings {
+  .bookings-mat-card {
+    width: 80%;
+    .bookings-tab {
+      margin: 5px;
+      ::ng-deep .mat-tab-body-content {
+        overflow: hidden !important;
+      }
     }
-    .mobile-card {
-      width: 95%;
-    }
-    margin: 10px auto;
   }
-  margin: 10 auto;
-  text-align: left;
+  margin: 10px 5px;
 }

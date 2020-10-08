@@ -1,6 +1,6 @@
 <div class="admin" fxLayout="row" fxLayoutAlign="space-around center">
   <mat-card class="mat-elevation-z2 admin-mat-card">
-    <mat-card-title>Movies</mat-card-title>
+    <mat-card-title>ADMIN DASHBOARD</mat-card-title>
 
     <mat-card-content>
       <div>
@@ -16,14 +16,14 @@
         </div>
         <div>
           <mat-tab-group color="accent" class="admin-tab">
-            <mat-tab label="Now Showing">
+            <mat-tab label="NOW SHOWING">
               <div *ngFor="let movie of moviesList">
                 <app-admin-movie-card
                   [movieDetails]="movie"
                 ></app-admin-movie-card>
               </div>
             </mat-tab>
-            <mat-tab label="Upcoming">
+            <mat-tab label="UPCOMING">
               <div *ngFor="let movie of upcomingMoviesList">
                 <app-admin-movie-card
                   [movieDetails]="movie"

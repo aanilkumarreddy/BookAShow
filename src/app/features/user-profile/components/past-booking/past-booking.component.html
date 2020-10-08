@@ -1,20 +1,62 @@
-<div class="past-booking">
+<div class="bookings" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-card class="mat-elevation-z2 bookings-mat-card">
+    <mat-card-title>BOOKINGS</mat-card-title>
+
+    <mat-card-content>
+      <div>
+        <div>
+          <mat-tab-group color="accent" class="bookings-tab">
+            <mat-tab label="CURRENT BOOKINGS">
+              <div *ngFor="let bookingDetail of currentBookings">
+                <app-past-booking-card
+                  [bookingDetails]="bookingDetail"
+                ></app-past-booking-card>
+              </div>
+              <div *ngIf="(currentBookings || []).length < 1">
+                <span>
+                  <h3>No Bookings Available</h3>
+                </span>
+              </div>
+            </mat-tab>
+            <mat-tab label="PAST BOOKINGS">
+              <div *ngFor="let bookingDetail of pastBookings">
+                <app-past-booking-card
+                  [bookingDetails]="bookingDetail"
+                ></app-past-booking-card>
+              </div>
+              <div *ngIf="(currentBookings || []).length < 1">
+                <span>
+                  <h3>No Bookings Available</h3>
+                </span>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <div class="past-booking">
   <div
     fxLayout="column"
     fxLayoutAlign="space-around center"
     class="past-flex-col"
   >
-    <div
-      *ngFor="let bookingDetail of bookings"
-      class="past-booking-card"
-      [ngClass.xs]="'mobile-card'"
-    >
-      <app-past-booking-card
-        [bookingDetails]="bookingDetail"
-      ></app-past-booking-card>
-    </div>
-    <div *ngIf="(bookings || []).length === 0">
-      <h3>No Bookings Available</h3>
-    </div>
+    <mat-card class="mat-elevation-z2">
+      <div
+        *ngFor="let bookingDetail of bookings"
+        class="past-booking-card"
+        [ngClass.xs]="'mobile-card'"
+      >
+        <app-past-booking-card
+          [bookingDetails]="bookingDetail"
+        ></app-past-booking-card>
+      </div>
+
+      <div *ngIf="(bookings || []).length === 0">
+        <h3>No Bookings Available</h3>
+      </div>
+    </mat-card>
   </div>
-</div>
+</div> -->

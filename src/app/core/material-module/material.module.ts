@@ -46,7 +46,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatRadioModule,
-    // MatRippleModule,
     MatSelectModule,
     MatSidenavModule,
     MatSnackBarModule,
@@ -55,7 +54,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatToolbarModule,
     MatTooltipModule,
     OverlayModule,
-    // PortalModule,
   ],
 })
 export class MaterialModule {}

@@ -104,6 +104,10 @@ forms - Reactive forms
 css - SCSS format
 Rxjs - 6.5.5
 
+Date related to movies is handled through Angular's [InMemoryWebApi](https://www.npmjs.com/package/angular-in-memory-web-api) . So, if the application is refreshes it resets back the changes that the user has done.
+
+The data of user's such as booking details, alerts, name, mobile will not be altered by refreshing the application, this is because we are using firebase database.
+
 ## code coverage
 
 code-coverage = 85%+
@@ -117,10 +121,20 @@ Progressive Web App - 100%
 Accessibility - 92/100
 Best practises - 92/100
 SEO - 100/100
-Performance - 70/100
+Performance - 75/100
 First Contentful Paint - 0.4s
 Time to interactive - 2.8s
-Speed Index - 1.4s
+Speed Index - 1.0s
 Total Blocking Time -260ms
 Cumulative Layout Shift - 0
 Memory leak between a transaction < 0.1MB
+
+# production ready code gzip version
+
+path: gzipped/BookAShow/browser
+run gzip version on http-server using 'http-server -g'
+
+# Web Pack build analyzer
+
+builder cmd: npm run build:stats
+cmd: npm run analyze
