@@ -34,7 +34,12 @@ export class AdminComponent implements OnInit {
   parseMovies(movies): void {
     movies.forEach((movie) => {
       if (movie.theater) {
-        if (new Date(movie.theater.fromDate) <= new Date()) {
+        const str = ((movie.theater || {}).fromDate || '').split('-');
+        const year = Number(str[2]);
+        const month = Number(str[1]) - 1;
+        const date = Number(str[0]);
+        const startDate = new Date(year, month, date);
+        if (startDate <= new Date()) {
           this.moviesList.push(movie);
         } else {
           this.upcomingMoviesList.push(movie);

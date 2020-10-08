@@ -101,8 +101,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     const upComingMovies = [];
     movies.forEach((movie) => {
       if (movie.theater) {
+        const str = ((movie.theater || {}).fromDate || '').split('-');
+        const year = Number(str[2]);
+        const month = Number(str[1]) - 1;
+        const date = Number(str[0]);
+        const startDate = new Date(year, month, date);
         movie.theater.distance = this.getDistance(movie.theater);
-        if (new Date(movie.theater.fromDate) <= new Date()) {
+        if (startDate <= new Date()) {
           currentMovies.push(movie);
         } else {
           upComingMovies.push(movie);
@@ -140,7 +145,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       const distance = google.maps.geometry.spherical.computeDistanceBetween(location1, currentLocation);
       return distance / 1000;
     } else {
-      return 'N/A';
+      return null;
     }
   }
 
