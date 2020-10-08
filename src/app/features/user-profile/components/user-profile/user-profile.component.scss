@@ -1,0 +1,35 @@
+@import "../../../../../assets/styles/variables.scss";
+
+.user-profile {
+  mat-card {
+    margin: 10px auto;
+
+    width: 50%;
+    form {
+      .input-field-style {
+        width: 80%;
+      }
+    }
+    mat-card-content {
+      margin-top: 30px;
+      margin-bottom: 30px;
+
+      .reset-pass {
+        color: $dark-light-warn;
+      }
+    }
+  }
+
+  .user-card-tab {
+    mat-card {
+      width: 80%;
+    }
+  }
+}
+::ng-deep .mat-input-element:disabled {
+  color: $black-clr !important;
+  cursor: not-allowed;
+}
+::ng-deep .dark-theme .mat-input-element:disabled {
+  color: $white-color !important;
+}

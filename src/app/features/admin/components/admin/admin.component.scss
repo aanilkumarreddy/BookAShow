@@ -1,0 +1,12 @@
+.admin {
+  .admin-mat-card {
+    width: 80%;
+    .admin-tab {
+      margin: 5px;
+      ::ng-deep .mat-tab-body-content {
+        overflow: hidden !important;
+      }
+    }
+  }
+  margin: 10px 5px;
+}

@@ -1,0 +1,151 @@
+@import "../../../..//../../assets/styles/variables.scss";
+
+mat-card {
+  margin-bottom: 1em;
+  min-height: 100px;
+}
+@media screen and (max-width: 600px) {
+  mat-card {
+    min-height: 75px;
+  }
+}
+mat-card-header,
+mat-card-actions,
+mat-card-content {
+  margin-left: 142px;
+}
+@media screen and (max-width: 400px) {
+  mat-card-header,
+  mat-card-actions,
+  mat-card-content {
+    margin-left: 0;
+  }
+}
+mat-card-content {
+  padding-left: 8px;
+}
+mat-card-subtitle {
+  font-size: 1.2em;
+}
+mat-card-title {
+  padding-right: 10em;
+  top: 24px;
+}
+.cv-thumbnail img {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  width: auto;
+  max-width: 100px;
+  height: auto;
+  max-height: 100px;
+  margin-bottom: 24px;
+  margin-right: 24px;
+}
+@media screen and (max-width: 600px) {
+  .cv-thumbnail img {
+    margin-right: 12px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .cv-thumbnail {
+    display: none;
+  }
+}
+.vertical-divider {
+  position: absolute;
+  border-left: 2px solid #888;
+  top: 24px;
+  left: 148px;
+  bottom: 24px;
+}
+@media screen and (max-width: 600px) {
+  .vertical-divider {
+    left: 142px;
+  }
+}
+.toggle-details {
+  position: absolute;
+  right: 24px;
+  bottom: 12px;
+  font-size: 1em;
+  float: right;
+}
+.toggle-details mat-icon {
+  position: absolute;
+  top: 0.2em;
+  left: 0;
+  font-size: 3em;
+}
+
+mat-card.opened mat-card-content,
+mat-card.opened mat-card-actions {
+  /*display: block;*/
+  max-height: 500px;
+  position: static;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s linear, max-height 0.25s ease-in;
+  overflow: hidden;
+}
+
+mat-card.closed mat-card-content,
+mat-card.closed mat-card-actions {
+  /*display: none;*/
+  max-height: 0;
+  position: static;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s linear, max-height 0.15s ease-out;
+  overflow: hidden;
+}
+
+mat-card.opened mat-card-actions {
+  margin-bottom: 0;
+}
+
+mat-card.opened .toggle-details mat-icon:before {
+  content: "expand_less";
+}
+mat-card.closed .toggle-details mat-icon:before {
+  content: "expand_more";
+}
+
+.timespan {
+  padding-left: 150px;
+  position: absolute;
+  right: 24px;
+  top: 18px;
+  // color: #888;
+}
+.timespan mat-icon {
+  position: relative;
+  top: 6px;
+  font-size: 1.5em;
+}
+@media screen and (max-width: 600px) {
+  .timespan {
+    position: relative;
+    left: 0;
+    top: -6px;
+  }
+  mat-card-title {
+    padding-right: 0;
+  }
+}
+@media screen and (max-width: 400px) {
+  .timespan {
+    padding-left: 8px;
+  }
+}
+
+a[mat-button] {
+  text-transform: uppercase;
+}
+.seat {
+  color: $white-color;
+  background-color: $light-grey;
+  padding: 5px;
+  margin: 0px 5px 5px 0px;
+  border-radius: 5px 5px 0px 0px;
+}

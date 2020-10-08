@@ -1,3 +1,5 @@
+@import "../../../../../assets/styles/variables.scss";
+
 .movie-details {
   .mobile-screen {
     mat-card {
@@ -14,5 +16,41 @@
   margin: 10px 0px;
   .details-row {
     margin: 5px 0px;
+    mat-card {
+      img {
+        max-height: 350px;
+        object-fit: contain;
+      }
+    }
+  }
+  .mobile-screen-crew {
+    overflow-x: scroll;
+    mat-card {
+      width: 140px;
+      margin: 0px 5px;
+    }
+  }
+  .cast-card {
+    mat-card {
+      mat-card-subtitle {
+        text-align: center;
+      }
+    }
+  }
+  .crew {
+    margin-top: 10px;
+  }
+  .details-subtitle {
+    margin: 2px 5px;
+  }
+  .imdb-btn {
+    background-color: $imdb-btn-clr;
+    color: $black-clr;
+    margin-bottom: 10px;
+  }
+  .statistics {
+    div {
+      text-align: center;
+    }
   }
 }

@@ -1,0 +1,88 @@
+<mat-card class="cv-card closed mat-elevation-z2">
+  <span class="cv-thumbnail">
+    <img
+      src="{{
+        '../../../../../../assets/images/' + (movieDetails || {}).poster_url
+      }}"
+      width="100px"
+      alt=""
+    />
+    <span class="vertical-divider"></span>
+  </span>
+  <span class="timespan" *ngIf="((movieDetails || {}).theater || {}).fromDate">
+    <span class="timespan-begin">
+      {{ ((movieDetails || {}).theater || {}).fromDate }}
+      <mat-icon>arrow_forward</mat-icon>
+    </span>
+    <span class="timespan-end">
+      {{ ((movieDetails || {}).theater || {}).toDate }}
+    </span>
+  </span>
+
+  <mat-card-header>
+    <mat-card-title>{{ (movieDetails || {}).title }}</mat-card-title>
+    <mat-card-subtitle>{{ (movieDetails || {}).sub_title }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <span>
+        Language:
+        <mat-chip-list [selectable]="false">
+          <span *ngFor="let language of (movieDetails || {}).languages">
+            <mat-chip *ngIf="language">{{ language }} </mat-chip>
+          </span>
+        </mat-chip-list>
+      </span>
+    </div>
+    <div class="mt-5">
+      <span>
+        Genres:
+        <mat-chip-list aria-label="Genres">
+          <span *ngFor="let genre of (movieDetails || {}).genres">
+            <mat-chip *ngIf="genre">{{ genre }} </mat-chip>
+          </span>
+        </mat-chip-list>
+      </span>
+    </div>
+    <div class="mt-5">
+      <span>Story : </span>
+      <p>
+        {{ (movieDetails || {}).story }}
+      </p>
+    </div>
+    <div *ngIf="(movieDetails || {}).theater" class="theater-details">
+      <div class="mt-5">
+        <span>Theater Name :</span
+        ><span>
+          {{
+            ((movieDetails || {}).theater || {}).name
+              ? ((movieDetails || {}).theater || {}).name
+              : "N/A"
+          }}</span
+        >
+      </div>
+      <div class="mt-5">
+        <span>Address :</span
+        ><span>
+          {{
+            ((movieDetails || {}).theater || {}).address
+              ? ((movieDetails || {}).theater || {}).address
+              : "N/A"
+          }}</span
+        >
+      </div>
+    </div>
+  </mat-card-content>
+
+  <button
+    mat-icon-button
+    type="button"
+    class="toggle-details"
+    color="accent"
+    role="button"
+    (click)="toggleDetails($event)"
+  >
+    <mat-icon aria-label="switch"></mat-icon>
+  </button>
+  <mat-card-actions> </mat-card-actions>
+</mat-card>

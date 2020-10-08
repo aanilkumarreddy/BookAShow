@@ -1,15 +1,14 @@
 @import "~@angular/material/theming";
 
+@import "~material-design-icons/iconfont/material-icons.css";
+
+@import "./assets/styles/variables.scss";
+
 @include mat-core();
 
 $app-dark-primary: mat-palette($mat-grey, 900);
 $app-dark-accent: mat-palette($mat-yellow, 800);
-// $app-dark-primary: mat-palette($mat-orange, 500, A700);
-// $app-dark-accent: mat-palette($mat-grey, 900);
-$app-dark-warn: mat-palette($mat-red, 500);
-//  $app-dark-primary,
-// $app-dark-accent,
-// $app-dark-warn
+$app-dark-warn: mat-palette($mat-red, 200);
 $app-dark-theme: mat-dark-theme(
   (
     color: (
@@ -30,24 +29,16 @@ $angular-dark-theme: mat-dark-theme(
     ),
   )
 );
-
-.darkMode {
-  @include angular-material-color($angular-dark-theme);
-}
 */
 .dark-theme {
   @include angular-material-theme($app-dark-theme);
-  // color: mat-color($app-dark-color);
-
-  // Get a specific hue for a palette.
-  // See https://material.io/archive/guidelines/style/color.html#color-color-palette for hues.
-  // background-color: mat-color($app-dark-primary, darker);
-
-  // Get a relative color for a hue ('lighter' or 'darker')
-  // outline-color: mat-color($app-dark-accent, lighter);
-
-  // Get a contrast color for a hue by adding `-contrast` to any other key.
-  // border-color: mat-color($app-dark-primary, "100-contrast");
+  .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: $dark-accent-color;
+  }
+  a {
+    color: $white-color !important;
+  }
 }
 // Normal theme
 $app-light-primary: mat-palette($mat-indigo);
@@ -62,4 +53,57 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.text-icon {
+  display: flex;
+  align-items: center;
+}
+mat-card {
+  outline: none;
+}
+::ng-deep .custom-overlay {
+  .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: $dark-accent-color;
+  }
+}
+
+.error-color {
+  background-color: $dark-warn;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.success-color {
+  background-color: $success-color;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.warning-color {
+  background-color: $dark-accent-color;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.flt-right {
+  float: right;
+}
+mat-card:last-child {
+  margin-bottom: 5px;
+}
+.btn-icon-right {
+  display: flex;
+  justify-content: flex-end;
+}
+a {
+  text-decoration: none;
+  color: $black-clr;
+}
+a:hover {
+  text-decoration: underline;
 }

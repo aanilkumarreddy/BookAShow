@@ -1,45 +1,60 @@
 <div class="home-page">
-  <app-filter></app-filter>
-  <mat-tab-group color="accent">
-    <mat-tab label="Now Showing">
+  <app-filter [filterForm]="filterForm"></app-filter>
+  <mat-tab-group color="accent" class="mat-elevation-z2">
+    <mat-tab label="NOW SHOWING">
       <ng-template matTabContent>
-        <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div
+          class="no-records"
+          *ngIf="((movieListDataSource || {}).filteredData || []).length < 1"
+        >
+          No Records Available
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="10px grid">
           <div
             [fxFlex]="100 / gridColumns + '%'"
             fxFlex.xs="100%"
             fxFlex.sm="33%"
             fxFlex.gt-lg="25%"
-            *ngFor="let item of [].constructor(10); let i = index"
+            *ngFor="let movie of (movieListDataSource || {}).filteredData"
           >
-            <app-movie-card></app-movie-card>
+            <app-movie-card
+              [movieDetails]="movie"
+              [locationDetails]="locationDetails"
+              [isMobile]="isMobile"
+            ></app-movie-card>
           </div>
         </div>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Next Change">
+    <mat-tab label="NEXT CHANGE">
       <ng-template matTabContent>
+        <div
+          *ngIf="
+            ((upcomingMovieDataSource || {}).filteredData || []).length < 1
+          "
+        >
+          No Records Available
+        </div>
+        <!-- {{ ((upcomingMovieDataSource || {}).filteredData || []).length }} -->
         <div div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
           <div
             [fxFlex]="100 / gridColumns + '%'"
             fxFlex.xs="100%"
             fxFlex.sm="33%"
             fxFlex.gt-lg="25%"
-            *ngFor="let item of [].constructor(10); let i = index"
+            *ngFor="let movie of (upcomingMovieDataSource || {}).filteredData"
           >
-            <app-movie-card [componentType]="'isShowingNext'"></app-movie-card>
+            <app-movie-card
+              [componentType]="'isShowingNext'"
+              [movieDetails]="movie"
+              [locationDetails]="locationDetails"
+              [isMobile]="isMobile"
+              [alertDetails]="alertDetails"
+              [userDetails]="userDetails"
+            ></app-movie-card>
           </div>
         </div>
       </ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>
-
-<!--  fxLayout="row wrap"
-        fxLayout.lt-sm="column"
-        fxLayoutGap="32px"
-        fxLayoutAlign="flex-start"
-
-       fxFlex="0 1 calc(33.3% - 32px)"
-            fxFlex.lt-md="0 1 calc(50% - 32px)"
-            fxFlex.lt-sm="100%"
-      -->

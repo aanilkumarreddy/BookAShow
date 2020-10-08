@@ -2,4 +2,10 @@
   ::ng-deep .mat-tab-body-content {
     overflow: hidden !important;
   }
+  ::ng-deep .mat-tab-body {
+    margin: 5px;
+  }
+  .no-records {
+    margin-bottom: 10px;
+  }
 }

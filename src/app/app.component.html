@@ -1,6 +1,18 @@
 <div [class.dark-theme]="isDarkTheme">
-  <app-header (toggleTheme)="toggleTheme()"></app-header>
-  <!-- <agm-map [latitude]="latitude" [longitude]="longitude">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map> -->
+  <div>
+    <app-header (toggleTheme)="toggleTheme($event)"></app-header>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+    <div class="flt-btn" *ngIf="isShow">
+      <button
+        mat-mini-fab
+        (click)="gotoTop()"
+        color="accent"
+        aria-label="button with a menu icon"
+      >
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </button>
+      <a> Move to top</a>
+    </div>
+  </div>
 </div>

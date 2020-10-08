@@ -1,0 +1,77 @@
+<mat-card class="cv-card closed mat-elevation-z8">
+  <span class="cv-thumbnail">
+    <img
+      src="{{
+        '../../../../../../../../assets/images/' +
+          (movieDetails || {}).poster_url
+      }}"
+      width="100px"
+      alt=""
+    />
+    <span class="vertical-divider"></span>
+  </span>
+
+  <span class="timespan">
+    <span class="timespan-begin">
+      <mat-icon>access_time</mat-icon> {{ (bookingDetails || {}).bookedFor }}
+      {{ (bookingDetails || {}).slotTime }}
+    </span>
+  </span>
+
+  <mat-card-header>
+    <mat-card-title>{{ (movieDetails || {}).title }}</mat-card-title>
+    <mat-card-subtitle>{{ (movieDetails || {}).sub_title }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <span>
+        Language:
+        <mat-chip-list [selectable]="false">
+          <mat-chip>{{ ((movieDetails || {}).languages || [])[0] }} </mat-chip>
+        </mat-chip-list>
+      </span>
+    </div>
+    <div class="theater-details">
+      <div class="mt-5">
+        <span>Theater Name :</span
+        ><span>{{ ((bookingDetails || {}).theater || {}).name }}</span>
+      </div>
+      <div class="mt-5">
+        <span>Address:</span
+        ><span>{{ ((bookingDetails || {}).theater || {}).address }}</span>
+      </div>
+    </div>
+    <div class="mt-5">
+      <span>
+        Number of Seats :
+        {{ ((bookingDetails || {}).bookedSeats || []).length }}
+      </span>
+    </div>
+    <div class="mt-5">
+      Selected seats :
+
+      <span
+        class="seat"
+        *ngFor="let seat of (bookingDetails || {}).bookedSeats"
+      >
+        {{ seat }}
+      </span>
+    </div>
+  </mat-card-content>
+
+  <button
+    mat-icon-button
+    type="button"
+    class="toggle-details"
+    color="accent"
+    (click)="toggleDetails($event)"
+  >
+    <mat-icon aria-label="switch"></mat-icon>
+  </button>
+  <mat-card-actions>
+    <!-- <a mat-button color="primary" href="" target="_blank">
+      <mat-icon>link</mat-icon>
+      VIEW LINK
+    </a> -->
+  </mat-card-actions>
+</mat-card>

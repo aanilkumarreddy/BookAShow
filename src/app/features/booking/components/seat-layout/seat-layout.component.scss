@@ -1,8 +1,8 @@
+@import "../../../../../assets/styles/variables.scss";
+
 .seat-container {
   .seatLayout {
     .plane {
-      // margin: 20px auto;
-      // max-width: 300px;
       width: fit-content;
     }
 
@@ -26,7 +26,7 @@
     margin-left: 20px;
     .screen {
       text-align: center;
-      background-color: darkgray;
+      background-color: $light-grey;
       margin: 0px 10%;
       width: 775px;
     }
@@ -38,8 +38,8 @@
   }
 
   .badge-primary {
-    color: #fff;
-    background-color: #a0a0a0;
+    color: $white-color;
+    background-color: $light-grey;
     padding: 5px;
     margin: 0px 5px 5px 0px;
     border-radius: 5px 5px 0px 0px;
@@ -47,74 +47,20 @@
   .seat-actions {
     margin: 10px;
     button {
-      float: right;
       margin: 15px 2px;
     }
+    .btn-large {
+      margin-right: 25%;
+    }
   }
-}
-
-// html {
-//   font-size: 16px;
-// }
-
-.seatLayout {
-}
-
-// .cockpit {
-//   height: 250px;
-//   position: relative;
-//   overflow: hidden;
-//   text-align: center;
-//   border-bottom: 5px solid #d8d8d8;
-//   &:before {
-//     content: "";
-//     display: block;
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     height: 500px;
-//     width: 100%;
-//     border-radius: 50%;
-//     border-right: 5px solid #d8d8d8;
-//     border-left: 5px solid #d8d8d8;
-//   }
-//   h1 {
-//     width: 60%;
-//     margin: 100px auto 35px auto;
-//   }
-// }
-
-// .exit {
-//   position: relative;
-//   height: 50px;
-//   &:before,
-//   &:after {
-//     content: "EXIT";
-//     font-size: 14px;
-//     line-height: 18px;
-//     padding: 0px 2px;
-//     font-family: "Arial Narrow", Arial, sans-serif;
-//     display: block;
-//     position: absolute;
-//     background: green;
-//     color: white;
-//     top: 50%;
-//     transform: translate(0, -50%);
-//   }
-//   &:before {
-//     left: 0;
-//   }
-//   &:after {
-//     right: 0;
-//   }
-// }
-
-// .fuselage {
-//   border-right: 5px solid #d8d8d8;
-//   border-left: 5px solid #d8d8d8;
-// }
-
-.row {
+  .form-cond {
+    margin-top: 10px;
+    mat-form-field {
+      width: 250px;
+    }
+  }
+  max-width: 2000px;
+  margin: 0 auto;
 }
 
 .seat {
@@ -141,7 +87,7 @@
   }
   input[type="checkbox"]:disabled {
     + label {
-      background: #dddddd;
+      background: #7b7c82;
       text-indent: -9999px;
       overflow: hidden;
       &:after {
@@ -167,7 +113,7 @@
     font-weight: bold;
     line-height: 1.5rem;
     padding: 4px 0;
-    background: #bada55;
+    background: #f9a825;
     border-radius: 5px;
     animation-duration: 300ms;
     animation-fill-mode: both;
@@ -268,153 +214,10 @@
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
 }
-// .example-radio-group {
-//   display: flex;
-//   flex-direction: column;
-//   /* display: inline-grid; */
-//   /* display: grid; */
-//   margin: 15px 0;
-// }
-// .custom-margin {
-//   margin: 5px;
-// }
-
-// $seat-available-bg: white;
-// $seat-available-color: #a0a0a0;
-// $seat-booked-bg: #a0a0a0;
-// $seat-booked-color: white;
-// $seat-unavailable-bg: black;
-// $seat-unavailable-color: white;
-
-// .badge-primary {
-//   color: #fff;
-//   background-color: $seat-available-color;
-//   padding: 5px;
-//   margin: 0px 5px 5px 0px;
-// }
-// .seatrow {
-//   display: inline-flex;
-// }
-// .pricing-label {
-//   font-weight: bold;
-//   margin: 0px 0px 16px 16px;
-//   padding: 0;
-//   text-align: left;
-//   color: #a0a0a0;
-//   border-bottom: 1px solid #e2e2e2;
-// }
-// .seat-item {
-//   height: 27px;
-//   width: 27px;
-//   line-height: 25px;
-//   margin: 3px;
-//   border-radius: 7px;
-//   font-size: 14px;
-//   padding-left: 5px;
-// }
-// .seat-space {
-//   background-color: white;
-//   border: 0;
-//   // cursor: none;
-// }
-// .seat-available {
-//   color: $seat-available-color;
-//   background-color: $seat-available-bg;
-//   font-weight: bolder;
-//   border: 1px solid $seat-available-color;
-// }
-// .seat-available:hover {
-//   color: $seat-available-color;
-//   background-color: $seat-available-bg;
-//   border: 1px solid $seat-available-color;
-// }
-// .seat-unavailable {
-//   color: $seat-unavailable-color;
-//   background-color: $seat-unavailable-bg;
-//   font-weight: bolder;
-//   border: 1px solid $seat-unavailable-color;
-// }
-// .seat-booked {
-//   color: $seat-booked-color;
-//   font-weight: bolder;
-//   background-color: $seat-booked-bg;
-//   border: 1px solid $seat-booked-color;
-// }
-// .seat-item:hover {
-//   cursor: pointer;
-// }
-
-// .seat-container {
-//   overflow-x: auto;
-//   overflow-y: hidden;
-// }
-
-// .seat-screen {
-//   background-color: gray;
-//   color: white;
-//   padding: 1%;
-//   text-align: center;
-//   font-weight: bolder;
-// }
-// .bookingbar {
-//   z-index: 1000;
-//   bottom: 0;
-//   position: fixed;
-//   background: white;
-//   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-//   width: 102%;
-
-//   h5 {
-//     font-weight: bold;
-//   }
-
-//   .book-area {
-//     width: 100%;
-//     padding: 0;
-//     margin: 0;
-
-//     button {
-//       width: 100%;
-//       height: 100%;
-//       margin: 0;
-//     }
-//   }
-// }
-
-// .total-amount {
-//   background-color: #f17924;
-//   color: white;
-//   cursor: pointer;
-// }
-// .row-label {
-//   color: black;
-//   background-color: white;
-//   min-width: 20px;
-//   font-weight: bolder;
-//   line-height: 32px;
-// }
-
-// .booking-summary {
-//   display: inline-flex;
-// }
-// .summary-bar {
-//   //  display: inline-flex;
-//   margin-top: 1%;
-// }
-// .no-padding {
-//   padding: 0;
-// }
-
-// .seatLayout {
-//   width: 100%;
-//   overflow: auto;
-//   padding: 10px;
-// }
-
-// .screen {
-//   width: 1078px;
-//   text-align: center;
-//   margin-left: 100px;
-//   background-color: darkgray;
-//   overflow: scroll;
-// }
+div[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.disabled-txt {
+  text-align: center;
+}

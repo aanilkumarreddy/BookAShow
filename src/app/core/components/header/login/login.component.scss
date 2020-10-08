@@ -1,3 +1,5 @@
+@import "../../../../../assets/styles/variables.scss";
+
 .mat-tab-body-margin {
   margin: 5px 10px;
 }
@@ -12,4 +14,10 @@
 }
 .btn-text {
   text-align: center;
+}
+.forgot-pass {
+  color: $dark-light-warn;
+}
+.dark-theme .forgot-pass {
+  color: $dark-light-warn;
 }

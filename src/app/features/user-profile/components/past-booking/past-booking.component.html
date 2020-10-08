@@ -1,0 +1,20 @@
+<div class="past-booking">
+  <div
+    fxLayout="column"
+    fxLayoutAlign="space-around center"
+    class="past-flex-col"
+  >
+    <div
+      *ngFor="let bookingDetail of bookings"
+      class="past-booking-card"
+      [ngClass.xs]="'mobile-card'"
+    >
+      <app-past-booking-card
+        [bookingDetails]="bookingDetail"
+      ></app-past-booking-card>
+    </div>
+    <div *ngIf="(bookings || []).length === 0">
+      <h3>No Bookings Available</h3>
+    </div>
+  </div>
+</div>

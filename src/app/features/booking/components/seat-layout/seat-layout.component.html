@@ -1,5 +1,67 @@
 <div class="seat-container">
-  <div class="seatLayout">
+  <form [formGroup]="seatForm">
+    <div
+      class="form-cond"
+      fxLayout="row wrap"
+      fxLayoutAlign="center center"
+      fxLayoutGap="20px"
+    >
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Choose a Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="MM/dd/yyyy"
+          [min]="todaysDate"
+          [max]="lastdate"
+          formControlName="date"
+          type="text"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>Enter a Valid Date</mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Number of Seats</mat-label>
+        <mat-select
+          role="select"
+          placeholder="Number of Seats"
+          formControlName="noOfSeats"
+        >
+          <mat-option
+            *ngFor="let item of [].constructor(6); let i = index"
+            [value]="i + 1"
+            >{{ i + 1 }}</mat-option
+          >
+        </mat-select>
+        <mat-error>Select number of Seats</mat-error>
+      </mat-form-field>
+      <mat-form-field color="accent" appearance="outline">
+        <mat-label>Show Timing</mat-label>
+
+        <mat-select
+          role="option"
+          placeholder="Choose a Slot"
+          formControlName="slot"
+        >
+          <mat-option
+            *ngFor="
+              let time of ((movieDetails || {}).theater || {}).showTimings
+            "
+            [value]="time"
+            >{{ time }}</mat-option
+          >
+        </mat-select>
+        <mat-error>Please Select a Slot</mat-error>
+      </mat-form-field>
+      <div></div>
+    </div>
+  </form>
+
+  <div *ngIf="isDisabled()" class="disabled-txt">
+    Please Select Date & Time to select seats
+  </div>
+  <div [attr.disabled]="isDisabled() ? true : null" class="seatLayout">
     <form class="seating-form" [ngClass.xs]="'mobile-seating'">
       <ol>
         <li *ngFor="let seats of rows" class="row row--1">
@@ -18,9 +80,7 @@
         </li>
       </ol>
     </form>
-    <div class="screen">
-      screen
-    </div>
+    <div class="screen">screen</div>
   </div>
 
   <div class="seat-actions">
@@ -36,106 +96,17 @@
       <button
         mat-raised-button
         color="accent"
-        [disabled]="seatsLayout?.booked?.length == 0"
+        [ngClass.gt-sm]="'btn-large'"
+        [disabled]="
+          seatsLayout?.booked?.length == 0 ||
+          seatsLayout?.booked?.length < seatForm.value.noOfSeats
+        "
         type="button"
         (click)="bookSeats()"
+        class="flt-right"
       >
-        Book Now
+        BOOK NOW
       </button>
     </div>
   </div>
 </div>
-
-<!-- <div style="text-align: center;"></div>
-
-<div class="seat-container">
-  <h3>
-    Seat Chart Layout
-  </h3>
-  <div class="seatLayout">
-    <div *ngFor="let seatrow of seatmap">
-      <div
-        class="pricing-label"
-        *ngIf="
-          seatChartConfig?.showRowWisePricing &&
-          seatrow.seatPricingInformation != ''
-        "
-      >
-        {{ seatrow.seatPricingInformation }}
-      </div>
-      <div class="seatrow container">
-        <div *ngIf="seatChartConfig?.showRowsLabel">
-          <div class="row-label">{{ seatrow.seatRowLabel }}</div>
-        </div>
-        <div *ngFor="let seatobj of seatrow.seats">
-          <div
-            class="seat-item seat-space"
-            style="color: white; background-color: white;"
-            *ngIf="seatobj.seatLabel == ''"
-          >
-            &nbsp;
-          </div>
-          <div
-            tooltip="Seat : {{ seatobj.seatLabel }} | Price : {{
-              seatobj.price
-            }}Rs"
-            placement="top"
-            [ngClass]="{
-              'seat-item': true,
-              'seat-available': seatobj.status == 'available',
-              'seat-booked': seatobj.status == 'booked',
-              'seat-unavailable': seatobj.status == 'unavailable'
-            }"
-            (click)="selectSeat(seatobj)"
-            *ngIf="
-              (seatobj.status == 'available' || seatobj.status == 'booked') &&
-              seatobj.seatLabel != ''
-            "
-          >
-            {{ seatobj.seatNo }}
-          </div>
-
-          <div
-            tooltip="Seat not available"
-            placement="top"
-            [ngClass]="{ 'seat-item': true, 'seat-unavailable': true }"
-            *ngIf="seatobj.status == 'unavailable' && seatobj.seatLabel != ''"
-          >
-            {{ seatobj.seatNo }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="screen">
-      Screen
-    </div>
-  </div>
-</div>
-<div class="continaer-fluid">
-  <div class="col-lg-12 summary-bar">
-    <div class="col-lg-4">
-      <div>
-        <h5>Total Selected : {{ cart?.selectedSeats?.length }}</h5>
-        <h5>Total Amount :&nbsp;&nbsp; {{ cart.totalamount }} Rs</h5>
-      </div>
-    </div>
-    <div class="selected-seats">
-      <h5 class="no-padding">Selected Seats :</h5>
-      <span
-        *ngFor="let seatLabel of cart.selectedSeats"
-        class="badge badge-primary"
-        >{{ seatLabel }}</span
-      >
-    </div>
-    <button
-      mat-raised-button
-      color="accent"
-      [disabled]="cart?.selectedSeats?.length == 0"
-      type="button"
-      (click)="blockSeats('A_1')"
-    >
-      Book Now
-    </button>
-  </div>
-  <div class="col-lg-12 book-area"></div>
-</div> -->

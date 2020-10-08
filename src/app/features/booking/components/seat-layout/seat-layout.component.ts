@@ -1,24 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { BookingInfoService } from './../../services/booking-info/booking-info.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MovieService } from './../../../movie/services/movie-service/movie.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-seat-layout',
   templateUrl: './seat-layout.component.html',
   styleUrls: ['./seat-layout.component.scss'],
 })
-export class SeatLayoutComponent implements OnInit {
+export class SeatLayoutComponent implements OnInit, OnDestroy {
+  seatForm: FormGroup;
   seatsLayout = {
     totalRows: 9,
     seatsPerRow: 16,
     seatNaming: 'rowType',
     booked: [],
-    disabled: ['2B'],
+    disabled: [],
   };
   typeOfSeats: any;
   rows = [];
   newRows = [];
-  constructor(private router: Router) {
-    // this.seatForm = this.fB.group({});
+  todaysDate = new Date();
+  lastdate = new Date();
+  movieDetails: any;
+  routerSubscription: Subscription;
+  valueChangesSubscription: Subscription;
+  constructor(
+    private router: Router,
+    private movieService: MovieService,
+    private route: ActivatedRoute,
+    private bookingInfoService: BookingInfoService
+  ) {
+    this.createForm();
+    this.routerSubscription = this.route.queryParams.subscribe((res) => {
+      this.getMovieDetails(+(res || {}).movieId);
+    });
   }
 
   ngOnInit(): void {
@@ -41,244 +59,99 @@ export class SeatLayoutComponent implements OnInit {
       }
     }
     this.rows = rows;
+
+    this.valueChangesSubscription = this.seatForm.valueChanges.subscribe(
+      (res: any) => {
+        if (res.date && res.slot) {
+          this.getBookedSeats(this.movieDetails.theater.bookedSeats);
+        }
+      }
+    );
+  }
+
+  createForm(): void {
+    this.seatForm = new FormGroup({
+      date: new FormControl('', [Validators.required]),
+      noOfSeats: new FormControl('', [Validators.required]),
+      slot: new FormControl('', Validators.required),
+    });
+  }
+
+  getMovieDetails(movieId): void {
+    this.movieService
+      .getMovieById(movieId)
+      .then((res) => {
+        this.movieDetails = res;
+        this.lastdate = new Date(res.theater.toDate);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   seatAction(seat): void {
-    // this.seatsLayout.booked = [seat];
+    const noOfSeatsReq = this.getFormValue('noOfSeats');
     if (this.seatsLayout.booked.indexOf(seat) >= 0) {
       this.seatsLayout.booked = this.seatsLayout.booked.filter((bookedSeat) => {
         return bookedSeat !== seat;
       });
     } else {
-      this.seatsLayout.booked.push(seat);
+      if (this.seatsLayout.booked.length >= noOfSeatsReq) {
+        this.seatsLayout.booked.splice(0, 1);
+        this.seatsLayout.booked.push(seat);
+      } else {
+        this.seatsLayout.booked.push(seat);
+      }
     }
   }
 
-  bookSeats(): void {
-    this.router.navigateByUrl('/booking/paymentHandler');
+  getBookedSeats(bookedSeats: any[]): void {
+    const alreadyBookedSeats = bookedSeats.find((res) => {
+      return (
+        Date.parse(res.date) ===
+          (this.getFormValue('date') || {}).setHours(0, 0, 0, 0) &&
+        res.slot === this.getFormValue('slot')
+      );
+    });
+    this.seatsLayout.disabled = alreadyBookedSeats
+      ? alreadyBookedSeats.seats
+      : [];
   }
 
-  // seatConfig: any = null;
-  // seatmap = [];
-  // seatChartConfig = {
-  //   showRowsLabel: true,
-  //   showRowWisePricing: true,
-  //   newSeatNoForRow: true,
-  // };
-  // cart = {
-  //   selectedSeats: [],
-  //   seatstoStore: [],
-  //   totalamount: 0,
-  //   cartId: '',
-  //   eventId: 0,
-  // };
+  bookSeats(): void {
+    const bookingInfoObj = {
+      movieId: this.movieDetails.id,
+      bookedSeats: this.seatsLayout.booked,
+      bookedFor: this.getFormValue('date'),
+      slotTime: this.getFormValue('slot'),
+      price: 250,
+      theater: {
+        name: ((this.movieDetails || {}).theater || {}).name,
+        address: ((this.movieDetails || {}).theater || {}).address,
+      },
+    };
+    this.bookingInfoService.setBookingInfo(bookingInfoObj);
+    this.router.navigate(['/booking/paymentHandler']);
+  }
 
-  // constructor() {}
+  getFormValue(params): any {
+    const formValue = this.seatForm.getRawValue();
+    return formValue[params];
+  }
 
-  // ngOnInit(): void {
-  //   this.seatConfig = [
-  //     {
-  //       seat_price: 300,
-  //       seat_map: [
-  //         {
-  //           seat_label: 'N',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'M',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'L',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'K',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'J',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'I',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'H',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: ' ',
-  //           layout: '',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       seat_price: 500,
-  //       seat_map: [
-  //         {
-  //           seat_label: 'G',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'F',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'E',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'D',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'C',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'B',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: 'A',
-  //           layout: '__cccccccccccc__ccccccccccccc__',
-  //         },
-  //         {
-  //           seat_label: ' ',
-  //           layout: '',
-  //         },
-  //       ],
-  //     },
-  //   ];
+  isDisabled(): boolean {
+    if (this.seatForm.invalid) {
+      return true;
+    }
+    return false;
+  }
 
-  //   this.processSeatChart(this.seatConfig);
-  // }
-
-  // processSeatChart(mapData: any[]): void {
-  //   if (mapData.length > 0) {
-  //     let seatNoCounter = 1;
-  //     // for (let __counter = 0; __counter < mapData.length; __counter++) {
-
-  //     mapData.forEach((data, index) => {
-  //       let rowLabel = '';
-  //       const itemMap = data.seat_map;
-
-  //       // Get the label name and price
-  //       rowLabel = 'Row ' + itemMap[0].seat_label + ' - ';
-  //       if (itemMap[itemMap.length - 1].seat_label != ' ') {
-  //         rowLabel += itemMap[itemMap.length - 1].seat_label;
-  //       } else {
-  //         rowLabel += itemMap[itemMap.length - 2].seat_label;
-  //       }
-  //       rowLabel += ' : Rs. ' + data.seat_price;
-
-  //       itemMap.forEach((mapElement) => {
-  //         const mapObj = {
-  //           seatRowLabel: mapElement.seat_label,
-  //           seats: [],
-  //           seatPricingInformation: rowLabel,
-  //         };
-  //         rowLabel = '';
-  //         const seatValArr = mapElement.layout.split('');
-  //         if (this.seatChartConfig.newSeatNoForRow) {
-  //           seatNoCounter = 1; // Reset the seat label counter for new row
-  //         }
-  //         let totalItemCounter = 1;
-  //         seatValArr.forEach((item) => {
-  //           const seatObj = {
-  //             key: mapElement.seat_label + '_' + totalItemCounter,
-  //             price: data['seat_price'],
-  //             status: 'available',
-  //           };
-
-  //           if (item != '_') {
-  //             seatObj['seatLabel'] =
-  //               mapElement.seat_label + ' ' + seatNoCounter;
-  //             if (seatNoCounter < 10) {
-  //               seatObj['seatNo'] = '0' + seatNoCounter;
-  //             } else {
-  //               seatObj['seatNo'] = '' + seatNoCounter;
-  //             }
-
-  //             seatNoCounter++;
-  //           } else {
-  //             seatObj['seatLabel'] = '';
-  //           }
-  //           totalItemCounter++;
-  //           mapObj['seats'].push(seatObj);
-  //         });
-  //         console.log(' \n\n\n Seat Objects ', mapObj);
-  //         this.seatmap.push(mapObj);
-  //       });
-  //     });
-
-  //     // }
-  //   }
-  // }
-
-  // public selectSeat(seatObject: any): void {
-  //   console.log('Seat to block: ', seatObject);
-  //   if (seatObject.status === 'available') {
-  //     seatObject.status = 'booked';
-  //     this.cart.selectedSeats.push(seatObject.seatLabel);
-  //     this.cart.seatstoStore.push(seatObject.key);
-  //     this.cart.totalamount += seatObject.price;
-  //   } else if (seatObject.status === 'booked') {
-  //     seatObject.status = 'available';
-  //     const seatIndex = this.cart.selectedSeats.indexOf(seatObject.seatLabel);
-  //     if (seatIndex > -1) {
-  //       this.cart.selectedSeats.splice(seatIndex, 1);
-  //       this.cart.seatstoStore.splice(seatIndex, 1);
-  //       this.cart.totalamount -= seatObject.price;
-  //     }
-  //   }
-  // }
-
-  // public blockSeats(seatsToBlock: string): void {
-  //   if (seatsToBlock !== '') {
-  //     const seatsToBlockArr = seatsToBlock.split(',');
-
-  //     seatsToBlockArr.forEach((seat, index) => {
-  //       const seatSplitArr = seat.split('_');
-  //       console.log('Split seat: ', seatSplitArr);
-  //       this.seatmap.forEach((element, index2) => {
-  //         if (element.seatRowLabel === seatSplitArr[0]) {
-  //           const seatObj = element.seats[parseInt(seatSplitArr[1]) - 1];
-  //           if (seatObj) {
-  //             seatObj['status'] = 'unavailable';
-  //             this.seatmap[index2]['seats'][
-  //               parseInt(seatSplitArr[1]) - 1
-  //             ] = seatObj;
-
-  //             return;
-  //           }
-  //         }
-  //       });
-  //     });
-
-  //     // for (let index = 0; index < seatsToBlockArr.length; index++) {
-  //     //   const seat = seatsToBlockArr[index] + '';
-  //     //   var seatSplitArr = seat.split('_');
-  //     //   console.log('Split seat: ', seatSplitArr);
-  //     //   for (let index2 = 0; index2 < this.seatmap.length; index2++) {
-  //     //     const element = this.seatmap[index2];
-  //     //     if (element.seatRowLabel == seatSplitArr[0]) {
-  //     //       var seatObj = element.seats[parseInt(seatSplitArr[1]) - 1];
-  //     //       if (seatObj) {
-
-  //     //         seatObj['status'] = 'unavailable';
-  //     //         this.seatmap[index2]['seats'][
-  //     //           parseInt(seatSplitArr[1]) - 1
-  //     //         ] = seatObj;
-
-  //     //         break;
-  //     //       }
-  //     //     }
-  //     //   }
-  //     // }
-  //   }
-  // }
-  // // processBooking() {}
+  ngOnDestroy(): void {
+    if (this.valueChangesSubscription) {
+      this.valueChangesSubscription.unsubscribe();
+    }
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
 }

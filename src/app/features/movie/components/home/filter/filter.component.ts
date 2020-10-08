@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { DISTANCE } from './../../../constants/distance.constant';
+import { GENRES } from './../../../constants/genres.constant';
+import { LANGUAGES } from './../../../constants/languages.constant';
 
 @Component({
   selector: 'app-filter',
@@ -7,11 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
-  constructor(private router: Router) {}
+  @Input() filterForm: FormGroup;
+
+  languages = LANGUAGES;
+  genres = GENRES;
+  distances = DISTANCE;
+  constructor() {}
 
   ngOnInit(): void {}
-
-  navigateTo(path: string): void {
-    this.router.navigateByUrl('/home/search');
-  }
 }

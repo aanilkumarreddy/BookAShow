@@ -1,40 +1,111 @@
-<mat-card [routerLink]="['movieDetail']" routerLinkActive="router-link-active">
+<mat-card
+  class="example-card"
+  [routerLink]="['movieDetail']"
+  routerLinkActive="router-link-active"
+  [queryParams]="{ movieId: (movieDetails || {}).id }"
+>
   <img
     mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu"
+    [src]="getImagePath(movieDetails)"
+    [alt]="(movieDetails || {}).title"
   />
-  <div fxLayout="row" fxLayoutAlign="space-between start">
-    Baahubali 2
-    <span> <mat-icon>location_on</mat-icon>10km </span>
+  <div *ngIf="isBrowser" fxLayout="row" fxLayoutAlign="space-between start">
+    {{ (movieDetails || {}).title }}
+    <span class="text-icon">
+      <mat-icon>location_on</mat-icon>
+      {{
+        ((movieDetails || {}).theater || {}).distance
+          ? (((movieDetails || {}).theater || {}).distance | number: "1.2-2")
+          : "NA "
+      }}KM
+    </span>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-between start">PVR Mall</div>
+  <div fxLayout="row" fxLayoutAlign="space-between start">
+    {{ ((movieDetails || {}).theater || {}).name }}
+  </div>
   <div fxLayout="row" fxLayoutAlign="start start">
-    <span *ngFor="let item of [].constructor(5); let i = index">
-      <mat-icon>face</mat-icon>
-    </span>
+    <mat-chip-list aria-label="list">
+      <span *ngFor="let item of (movieDetails || {}).languages">
+        <mat-chip *ngIf="item">
+          {{ item }}
+        </mat-chip>
+      </span>
+    </mat-chip-list>
   </div>
   <hr />
   <mat-card-content>
-    <div fxLayout="row" fxLayoutAlign="start start">
-      <span>
+    <!-- <div fxLayout="row" fxLayoutAlign="start start">
+      <span class="text-icon">
         <mat-icon>schedule</mat-icon>
-        <button mat-button color="accent">5:30PM</button>
+        <button mat-button color="accent">
+          <div>5:30 PM</div>
+        </button>
         <button mat-button color="accent">5:30PM</button>
         <button mat-button color="accent">5:30PM</button>
       </span>
-    </div>
+    </div> -->
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="space-between start">
-    <button *ngIf="!isShowingNext" mat-raised-button color="accent">
+    <button
+      *ngIf="!isShowingNext"
+      (click)="matCardClick(movieDetails); $event.stopPropagation()"
+      mat-raised-button
+      color="accent"
+      aria-label="button"
+    >
       BOOK
     </button>
-    <button color="accent" mat-mini-fab *ngIf="isShowingNext">
+    <button
+      color="accent"
+      mat-mini-fab
+      (click)="addAlert($event, movieDetails); $event.stopPropagation()"
+      *ngIf="isShowingNext"
+      role="button"
+      aria-label="button"
+      matTooltip="Notify on release date"
+      aria-label="Button that displays a tooltip when focused or hovered over"
+    >
       <mat-icon>add_alert</mat-icon>
     </button>
-
-    <button color="accent" mat-mini-fab>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item>
+        <a
+          mat-button
+          href="{{ 'https://web.whatsapp.com/send?text=' + shareUrl }}"
+          target="_blank"
+        >
+          Whatsapp</a
+        >
+      </button>
+      <button mat-menu-item aria-label="button">
+        <a
+          mat-button
+          target="_blank"
+          href="{{
+            'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl
+          }}"
+          >Facebook</a
+        >
+      </button>
+    </mat-menu>
+    <button
+      [matMenuTriggerFor]="menu"
+      (click)="$event.stopPropagation()"
+      color="accent"
+      mat-mini-fab
+      *ngIf="!isMobile"
+      aria-label="button"
+    >
+      <mat-icon>share</mat-icon>
+    </button>
+    <button
+      (click)="shareMovie(movieDetails); $event.stopPropagation()"
+      color="accent"
+      mat-mini-fab
+      *ngIf="isMobile"
+      aria-label="button"
+    >
       <mat-icon>share</mat-icon>
     </button>
   </mat-card-actions>

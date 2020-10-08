@@ -13,6 +13,7 @@
                 maxlength="16"
                 formControlName="cardCode"
                 maxlength="16"
+                type="text"
               />
               <mat-error>{{
                 (creditForm.get("cardCode").errors || {}).creditCard
@@ -22,7 +23,12 @@
             <div>
               <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Name on card</mat-label>
-                <input matInput placeholder="Name on Card" />
+                <input
+                  formControlName="name"
+                  matInput
+                  placeholder="Name on Card"
+                  type="text"
+                />
               </mat-form-field>
             </div>
 
@@ -31,7 +37,11 @@
             <div fxLayout="row wrap">
               <div fxFlex fxFlex.gt-md="20%">
                 <mat-form-field appearance="outline" class="small-dropdown">
-                  <mat-select placeholder="Month">
+                  <mat-select
+                    role="option"
+                    formControlName="month"
+                    placeholder="Month"
+                  >
                     <mat-option
                       *ngFor="let item of [].constructor(12); let i = index"
                       value="i+1"
@@ -43,7 +53,11 @@
               </div>
               <div fxFlex fxFlex.gt-md="20%">
                 <mat-form-field appearance="outline" class="small-dropdown">
-                  <mat-select placeholder="Year">
+                  <mat-select
+                    role="option"
+                    formControlName="year"
+                    placeholder="Year"
+                  >
                     <mat-option *ngFor="let year of years" [value]="year">{{
                       year
                     }}</mat-option>
@@ -59,6 +73,7 @@
                     formControlName="cvv"
                     placeholder="cvv"
                     maxlength="4"
+                    type="text"
                   />
                   <mat-error>Enter a valid number</mat-error>
                 </mat-form-field>
@@ -69,8 +84,9 @@
               mat-raised-button
               color="accent"
               type="submit"
+              (click)="processPayment()"
             >
-              Submit
+              SUBMIT
             </button>
           </form>
         </mat-card-content>
@@ -78,43 +94,89 @@
     </mat-tab>
     <mat-tab label="UPI">
       <mat-card>
-        <div>
-          <label id="example-radio-group-label">Pick payment mode</label>
-          <div>
-            <mat-radio-group
-              aria-labelledby="example-radio-group-label"
-              class="example-radio-group"
-              fxLayout="column"
-              fxLayoutAlign="center none"
-              fxFlexFill
-            >
-              <mat-radio-button
-                class="example-radio-button"
-                (change)="radioChange($event)"
-                *ngFor="let item of upis"
-                [value]="item"
+        <mat-card-title>UPI Payment</mat-card-title>
+        <mat-card-content>
+          <form [formGroup]="upiForm">
+            <label id="example-radio-group-label">Pick payment mode</label>
+            <div>
+              <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                fxLayout="column"
+                fxLayoutAlign="center none"
+                fxFlexFill
+                formControlName="upiType"
               >
-                {{ item.name }}
-              </mat-radio-button>
-            </mat-radio-group>
-            <mat-form-field *ngIf="showOtherUpiField" appearance="outline">
-              <input matInput />
-            </mat-form-field>
-          </div>
-        </div>
+                <mat-radio-button
+                  class="example-radio-button"
+                  (change)="radioChange($event)"
+                  *ngFor="let item of upis"
+                  [value]="item"
+                >
+                  {{ item.name }}
+                </mat-radio-button>
+              </mat-radio-group>
+              <mat-form-field
+                *ngIf="showOtherUpiTextField"
+                appearance="outline"
+                class="form-full-width"
+              >
+                <mat-label>Enter UPI id</mat-label>
+                <input
+                  matInput
+                  formControlName="upiText"
+                  placeholder="xxxxx@xxx"
+                  type="text"
+                />
+              </mat-form-field>
+            </div>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="accent"
+            [disabled]="!upiForm.valid"
+            type="submit"
+            (click)="processPayment()"
+          >
+            SUBMIT
+          </button>
+        </mat-card-actions>
       </mat-card>
     </mat-tab>
     <mat-tab label="Net Banking">
       <mat-card>
-        <mat-form-field appearance="outline">
-          <mat-select>
-            <mat-option
-              *ngFor="let item of [].constructor(3); let i = index"
-              [value]="item"
-              >{{ item }}</mat-option
+        <mat-card-title>Net Banking</mat-card-title>
+        <mat-card-content>
+          <form [formGroup]="netBankingForm">
+            <mat-form-field
+              appearance="outline"
+              class="form-full-width net-banking"
             >
-          </mat-select>
-        </mat-form-field>
+              <mat-label>Choose a Bank</mat-label>
+              <mat-select role="option" formControlName="bankName">
+                <mat-option
+                  placeholder="Choose a Bank"
+                  *ngFor="let bank of bankingList"
+                  [value]="bank"
+                  >{{ bank }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="accent"
+            [disabled]="!netBankingForm.valid"
+            type="submit"
+            (click)="processPayment()"
+          >
+            SUBMIT
+          </button>
+        </mat-card-actions>
       </mat-card>
     </mat-tab>
   </mat-tab-group>

@@ -1,0 +1,38 @@
+<div class="admin" fxLayout="row" fxLayoutAlign="space-around center">
+  <mat-card class="mat-elevation-z2 admin-mat-card">
+    <mat-card-title>Movies</mat-card-title>
+
+    <mat-card-content>
+      <div>
+        <div class="btn-icon-right">
+          <button
+            mat-button
+            color="accent"
+            [routerLink]="['/admin/addMovie']"
+            routerLinkActive="router-link-active"
+          >
+            <mat-icon>add</mat-icon>ADD MOVIE
+          </button>
+        </div>
+        <div>
+          <mat-tab-group color="accent" class="admin-tab">
+            <mat-tab label="Now Showing">
+              <div *ngFor="let movie of moviesList">
+                <app-admin-movie-card
+                  [movieDetails]="movie"
+                ></app-admin-movie-card>
+              </div>
+            </mat-tab>
+            <mat-tab label="Upcoming">
+              <div *ngFor="let movie of upcomingMoviesList">
+                <app-admin-movie-card
+                  [movieDetails]="movie"
+                ></app-admin-movie-card>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

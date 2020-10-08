@@ -1,17 +1,13 @@
 .example-card {
-  max-width: 30%;
-  // display: inline-block;
-  // margin: 5px;
-  img {
-    // height: fit-content; //so that it takes up full space
-    // max-height: 300px !important; // this prevents the image from being extremely big
-    // object-fit: cover;
-    // object-position: center;
+  .mat-card-image {
+    height: 200px;
+    object-fit: contain;
   }
+  cursor: pointer;
 }
 .example-spacer {
   flex: 1 1 auto;
 }
-.floatRight {
-  float: right;
+::ng-deep .mat-chip {
+  margin: 3px !important;
 }

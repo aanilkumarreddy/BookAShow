@@ -4,37 +4,72 @@
     color="accent"
     class="example-stretched-tabs mat-elevation-z1"
   >
-    <mat-tab label="Login">
+    <mat-tab label="LOGIN">
       <div class="mat-tab-body-margin login">
         <div>
-          <div fxLayout="column">
+          <form [formGroup]="loginForm" fxLayout="column">
             <mat-form-field appearance="outline">
-              <input matInput />
+              <mat-label>E-mail</mat-label>
+              <input
+                matInput
+                placeholder="E-mail"
+                type="email"
+                formControlName="email"
+              />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <input type="password" matInput />
-            </mat-form-field>
+              <mat-label>Password</mat-label>
 
-            <button mat-raised-button class="login-btns" color="accent">
-              Login
+              <input
+                type="password"
+                matInput
+                placeholder="Password"
+                formControlName="password"
+              />
+            </mat-form-field>
+            <a
+              [routerLink]="['/user/forgot-password']"
+              routerLinkActive="router-link-active"
+              (click)="closeDialog()"
+            >
+              <span color="warn" class="forgot-pass flt-right">
+                Forgot Password?
+              </span>
+            </a>
+            <button
+              mat-raised-button
+              class="login-btns"
+              (click)="loginWithEmail()"
+              color="accent"
+            >
+              LOGIN
             </button>
             <div class="btn-text">
               <span> or</span>
             </div>
-            <button class="login-btns google-btn" mat-raised-button>
+            <button
+              class="login-btns google-btn"
+              mat-raised-button
+              (click)="googleLogin()"
+            >
               <img src="../../../../../assets/images/google.png" alt="google" />
               Sign In With Google
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Sign Up">
+    <mat-tab label="SIGNUP">
       <div class="mat-tab-body-margin sign-up">
         <form [formGroup]="signUpForm" fxLayout="column">
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input formControlName="name" matInput placeholder="Name" />
+            <input
+              formControlName="name"
+              type="text"
+              matInput
+              placeholder="Name"
+            />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -56,6 +91,7 @@
               formControlName="password"
               type="password"
             />
+            <mat-hint> password must contain between 6-15 characters </mat-hint>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Re-Enter Password</mat-label>
@@ -66,13 +102,15 @@
               formControlName="confirmPassword"
               placeholder="Re-Enter Password"
             />
+            <mat-error>Confirm password must be same as password</mat-error>
           </mat-form-field>
           <button
             [disabled]="!signUpForm.valid"
             mat-raised-button
+            (click)="signUp()"
             color="accent"
           >
-            Sign Up
+            SIGNUP
           </button>
         </form>
       </div>

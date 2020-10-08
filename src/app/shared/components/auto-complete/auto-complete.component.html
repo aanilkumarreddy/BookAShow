@@ -1,0 +1,28 @@
+<mat-form-field
+  [ngClass]="normalClass"
+  [ngClass.xs]="mobileClass"
+  appearance="outline"
+>
+  <mat-label>{{ placeHolder }}</mat-label>
+  <input
+    matInput
+    placeholder="{{ placeHolder }}"
+    [matAutocomplete]="inputAuto"
+    [formControl]="fieldCtrl"
+    type="text"
+  />
+  <mat-autocomplete
+    #inputAuto="matAutocomplete"
+    showPanel="true"
+    [displayWith]="displayTemplate"
+  >
+    <mat-option
+      *ngFor="let element of autoCompleteValues"
+      [value]="element"
+      (click)="onSelect(element)"
+      [title]="(element || {}).title"
+    >
+      {{ element.title }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

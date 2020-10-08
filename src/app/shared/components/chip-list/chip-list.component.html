@@ -1,0 +1,35 @@
+<mat-form-field
+  appearance="outline"
+  color="accent"
+  [ngClass]="normalClass"
+  [ngClass.xs]="mobileClass"
+>
+  <mat-label> {{ placeholder }}</mat-label>
+  <mat-select
+    #multiSelect
+    [multiple]="!isSingleSelect"
+    (selectionChange)="onSelectChange($event)"
+    placeholder="{{ placeholder }}"
+  >
+    <!-- [formControl]="fieldCtrl" -->
+    <mat-select-trigger>
+      <mat-chip-list #chipList selected>
+        <ng-container>
+          <mat-chip
+            *ngFor="let chip of fieldCtrl?.value; let matChipIndex = index"
+            szelected
+            color="nil"
+            [removable]="true"
+            (removed)="onRemoveChip(multiSelect, matChipIndex)"
+          >
+            {{ chip }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </ng-container>
+      </mat-chip-list>
+    </mat-select-trigger>
+    <mat-option *ngFor="let item of autoCompleteValues" [value]="item">
+      {{ item }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

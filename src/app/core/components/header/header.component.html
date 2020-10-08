@@ -1,52 +1,101 @@
-<!-- <mat-toolbar color="primary">
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Book A Show</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon">
-    <mat-icon>account_circle</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    (click)="changeTheme()"
-    class="example-icon"
-    aria-label="Example icon-button with share icon"
-  >
-    <mat-icon>settings_brightness</mat-icon>
-  </button>
-</mat-toolbar> -->
-
-<mat-toolbar color="primary">
+<mat-toolbar id="main" color="primary" class="app-toolbar mat-elevation-z2">
   <div fxShow="true" fxHide.gt-sm="true">
-    <button mat-icon-button (click)="sidenav.toggle()">
+    <button mat-icon-button aria-label="switch" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
 
-  <a mat-button class="companyName" routerLink="/">
+  <a mat-button aria-label="navigation" class="companyName" routerLink="/">
     <span>Book A Show</span>
   </a>
   <span class="example-spacer"></span>
+  <button
+    *ngIf="isAdmin"
+    mat-button
+    aria-label="navigation"
+    [routerLink]="['/admin']"
+    routerLinkActive="router-link-active"
+  >
+    Admin <mat-icon>dashboard</mat-icon>
+  </button>
+
   <div fxShow="true" fxHide.lt-md="true">
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon">
+    <button
+      *ngIf="!isLoggedIn"
+      mat-icon-button
+      matTooltip="Switch Theme"
+      (click)="changeTheme()"
+      class="example-icon"
+      aria-label="switch"
+    >
+      <mat-icon>invert_colors</mat-icon>
+    </button>
+    <button
+      *ngIf="isLoggedIn"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      class="example-icon"
+      aria-label="menu"
+    >
       <mat-icon>account_circle</mat-icon>
     </button>
+
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>User Profile</button>
-      <button mat-menu-item>Past Bookings</button>
-      <button mat-menu-item (click)="changeTheme()">
-        Toggle theme
+      <button
+        *ngIf="!isAdmin"
+        mat-menu-item
+        [routerLink]="['/user/userProfile']"
+        routerLinkActive="router-link-active"
+        aria-label="navigation"
+      >
+        User Profile
+      </button>
+      <button
+        *ngIf="!isAdmin"
+        mat-menu-item
+        [routerLink]="['/user/current-bookings']"
+        routerLinkActive="router-link-active"
+        aria-label="navigation"
+      >
+        Current Bookings
+      </button>
+      <button
+        *ngIf="!isAdmin"
+        mat-menu-item
+        [routerLink]="['/user/past-bookings']"
+        routerLinkActive="router-link-active"
+        aria-label="navigation"
+      >
+        Past Bookings
+      </button>
+
+      <button aria-label="switch" mat-menu-item (click)="changeTheme()">
+        Switch Theme
+      </button>
+      <button mat-menu-item aria-label="button" (click)="logout()">
+        Logout
       </button>
     </mat-menu>
-    <button mat-raised-button (click)="login()" color="accent">
+
+    <button
+      *ngIf="!isLoggedIn"
+      mat-button
+      (click)="login()"
+      aria-label="button"
+    >
       Login
     </button>
   </div>
+  <button
+    *ngIf="isLoggedIn && !isAdmin"
+    (click)="toggleEndNav()"
+    mat-icon-button
+    aria-label="switch"
+  >
+    <mat-icon [matBadge]="(notifications || []).length" matBadgeColor="accent"
+      >notifications</mat-icon
+    >
+  </button>
 </mat-toolbar>
 <mat-sidenav-container fxFlexFill class="example-container">
   <mat-sidenav
@@ -56,14 +105,76 @@
     mode="over"
     opened="false"
     fxHide.gt-sm="true"
+    (click)="sidenav.toggle()"
   >
-    <div fxLayout="column">
-      <button mat-icon-button class="example-icon">
-        <mat-icon>account_circle</mat-icon>
+    <button mat-menu-item (click)="changeTheme()" aria-label="switch">
+      Switch Theme
+    </button>
+
+    <div *ngIf="isLoggedIn">
+      <button
+        *ngIf="!isAdmin"
+        mat-menu-item
+        [routerLink]="['/user/userProfile']"
+        routerLinkActive="router-link-active"
+        aria-label="navigation"
+      >
+        User Profile
       </button>
-      <button mat-icon-button (click)="changeTheme()" class="example-icon">
-        <mat-icon>settings_brightness</mat-icon>
+      <button
+        *ngIf="!isAdmin"
+        mat-menu-item
+        [routerLink]="['/user/current-bookings']"
+        routerLinkActive="router-link-active"
+        aria-label="navigation"
+      >
+        Current Bookings
       </button>
+      <button
+        *ngIf="!isAdmin"
+        mat-menu-item
+        [routerLink]="['/user/pastbookings']"
+        routerLinkActive="router-link-active"
+        aria-label="navigation"
+      >
+        Past Bookings
+      </button>
+      <button mat-menu-item (click)="logout()" aria-label="button">
+        Logout
+      </button>
+    </div>
+    <div *ngIf="!isLoggedIn">
+      <button mat-menu-item aria-label="button" (click)="login()">Login</button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav
+    *ngIf="isLoggedIn"
+    #endNav
+    mode="over"
+    [autoFocus]="false"
+    fixedInViewport="true"
+    [style.marginTop.px]="56"
+    position="end"
+  >
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-card
+        class="mat-elevation-z2 notify-card"
+        *ngFor="let alert of notifications"
+        (click)="navigateTo((alert || {}).click_action)"
+      >
+        <mat-card-subtitle>
+          {{ (alert || {}).title }}
+        </mat-card-subtitle>
+        <mat-card-content>
+          {{ (alert || {}).body }}
+        </mat-card-content>
+      </mat-card>
+      <mat-card
+        class="mat-elevation-z2 notify-card"
+        *ngIf="(notifications || []).length === 0"
+      >
+        <mat-card-content> No notifications avialable </mat-card-content>
+      </mat-card>
     </div>
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>
