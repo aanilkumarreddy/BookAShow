@@ -51,8 +51,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
       # build the app
-      # - name: Build the app artifact for prod
-      #   run: npm run build --prod
+      - name: Build the app artifact for prod
+        run: npm run build --prod
       # ddeploy the app artifact to firebase
       - name: Deploy angular app to Firebase
         uses: w9jds/firebase-action@master
