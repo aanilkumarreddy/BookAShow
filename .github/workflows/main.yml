@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: public
-          path: ./public
+          path: ./dist/BookAShow/browser
   # deploy job
   deploy:
     name: Deploy to firebase
