@@ -115,7 +115,10 @@ code-coverage file path => coverage/BookAShow/index.html
 
 ## others
 
-# In production ready code -> dist/BookAShow/browser
+# In production ready code
+
+path - dist/BookAShow/browser
+gzipper path - gzipper/BookAShow/browser
 
 Progressive Web App - 100%
 Accessibility - 92/100
