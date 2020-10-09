@@ -1,13 +1,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'XXXXXXXXXXXXXXXXX',
-    authDomain: 'XXXXXX',
-    databaseURL: 'XXXXXXX',
-    projectId: 'XXXX',
-    storageBucket: 'XXXXXXX',
-    messagingSenderId: 'XXXXXXX',
-    appId: 'XXXXXXXXXXXXXXXXXX',
-    measurementId: 'XXXXXXXXXX',
+    apiKey: 'AIzaSyCLNmlD-uHlsqCLSIkFDqq7CaoEtefnDWY',
+    authDomain: 'book-a-show.firebaseapp.com',
+    databaseURL: 'https://book-a-show.firebaseio.com',
+    projectId: 'book-a-show',
+    storageBucket: 'book-a-show.appspot.com',
+    messagingSenderId: '974490480766',
+    appId: '1:974490480766:web:e29e72300c6712f458282f',
+    measurementId: 'G-JFDD8YLD2B',
   },
 };
