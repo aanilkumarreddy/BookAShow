@@ -85,18 +85,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  getMovies(): void {
+  getMovies(isDistanceReq: boolean): void {
     this.movieService
       .getMovieList()
       .then((res) => {
-        this.parseMovies(res);
+        this.parseMovies(res, isDistanceReq);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  parseMovies(movies: any[]): void {
+  parseMovies(movies: any[], isDistanceReq: boolean): void {
     const currentMovies = [];
     const upComingMovies = [];
     movies.forEach((movie) => {
@@ -106,7 +106,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         const month = Number(str[1]) - 1;
         const date = Number(str[0]);
         const startDate = new Date(year, month, date);
-        movie.theater.distance = this.getDistance(movie.theater);
+        if (isDistanceReq) {
+          movie.theater.distance = this.getDistance(movie.theater);
+        }
         if (startDate <= new Date()) {
           currentMovies.push(movie);
         } else {
@@ -166,12 +168,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   loadGoogleMaps(): void {
     this.mapsAPILoader
       .load()
-      .then((res) => {})
+      .then((res) => {
+        this.getMovies(true);
+      })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        this.getMovies();
+        this.getMovies(false);
       });
   }
 

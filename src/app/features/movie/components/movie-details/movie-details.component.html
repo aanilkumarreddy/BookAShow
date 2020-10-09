@@ -52,6 +52,7 @@
           [ngClass.xs]="'mapNarrowClass'"
           [latitude]="((movieDetails || {}).theater || {}).latitude"
           [longitude]="((movieDetails || {}).theater || {}).longitude"
+          [zoom]="8"
         >
           <agm-marker
             [latitude]="((movieDetails || {}).theater || {}).latitude"
