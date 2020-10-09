@@ -45,13 +45,7 @@ describe('AdminComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AdminComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        MaterialModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FlexLayoutModule,
-      ],
+      imports: [MaterialModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, FlexLayoutModule],
       providers: [
         { provide: MovieService, useValue: movieStub },
         { provide: ManualSpinnyService, useValue: spinnyStub },

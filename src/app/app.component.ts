@@ -3,7 +3,6 @@ import { ManualSpinnyService } from './core/services/manual-spinny/manual-spinny
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, AfterViewInit, HostListener, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 
-declare const google: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
