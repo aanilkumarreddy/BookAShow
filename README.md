@@ -14,9 +14,9 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Using BOOK A SHOW Application
+# Using BOOK A SHOW Application
 
-## Home Page
+# Home Page
 
 Shows the header, which contains company name and buttons such as login, logout, switch theme etc...
 
@@ -28,66 +28,66 @@ Moving to 'NEXT CHANGE' tab, user will be shown with the list of upcoming movies
 
 Switch theme is used to toogle between Light and Dark themes.
 
-# Login/Signup
+## Login/Signup
 
 The user can view the login/signup dialog by clicking on login button available in header. Once clicked, the user will be presented two tabs, namely 'Login', 'Signup'. User can select tab based on whether he is an existing user or a new user.
 
-# Login
+## Login
 
 The users should provide valid email and password to enter as an user.
 
-# Admin login details
+## Admin login details
 
 email : admin@admin.com
 password : admin12345
 
-# signup
+## signup
 
 The user should provide valid details such as name, email and password inorder to signup.
 
-# Google login
+## Google login
 
 If the user wishes to login using google-signin, he can click on google signin button, where user will be shown a popup from google.
 
-# Movie Details Page
+## Movie Details Page
 
 By Clicking on the respective movie card, the user will be navigated to the movie details screen, where user will be shown with list of details available for the movie such as map indicating the location of theater, 'IMDB' button which on click will take to particular movie on Imdb page, details of popularity, voting averrage etc... Cast and Crew of the movie. By clicking on the 'BOOK' button the user will be navigated booking page. Alert icon button is available, which can be used for notifying the user about the movie on a particular date(between start and end date of movie). Share button where user can share details on social platform.
 
-# Booking Page
+## Booking Page
 
 Here user will be shown with a seat layout for selecting the seats that he requiers. Intially the seat layout will be in disabled mode till the user fill the details such as date, slot time, number of seats required. Once the user selects all the details the seat layout will now be available for user selection, once done 'Book Now' button which is in disabled the state until the user selected the required seats, will now be available for user operation. Click the 'BOOK NOW' button to proceed for payment operation.
 
-# Payment Page
+## Payment Page
 
 Once the seats selection is done and all the required criterias are met the user will be shown with the payment page else he will be redirected to home/booking page. Once the required criteria is met the user will be shown with different payment options such as credit/debit card, upi, Netbanking. The user can select the mode of payment as per his wish and fill the details required based on mode of payment selected. On successful completion of payment the user will be shown with a message confirming that the tickets were booked successfully.
 
-# User Profile Page
+## User Profile Page
 
 The User profile page is accessed using the button present inside the header. This will show the user details such as name, email, mobile. The user will be given an option to change name/ mobile number by filling the required details. The user logged in with google will not be able to change the name, since google api's won't allow such operation. The user will be shown with 'Change Password' option, which on click will take the user to respective page.
 
-# Reset Password
+## Reset Password
 
 The logged in user will be able to change his password by filling the required details.
 
-# Forgot Password
+## Forgot Password
 
 If an existing user forgot's his/her password, he can utilise this service. The user should enter his email id, which is given at the time of signup. On successful opration an E-mail will be sent to users registered id, through which he/she can change the password with the link given in the mail.
 
-# Past Booking
+## Past Booking
 
 The logged in user will be able to view the list past bookings.
 
-# Current Bookings
+## Current Bookings
 
 The user will be able to view the list of upcoming bookings.
 
-## Admin
+# Admin
 
-# Admin Dashboard
+## Admin Dashboard
 
 Admin Dashboard contains the list of movies, seperated by currently showing and upcoming. Dashboard consists of 'ADD MOVIE' button, which is used for adding a movie.
 
-# Add Movie
+## Add Movie
 
 For adding movie user needs to enter the title, which inturn calls an api, to show the list of movies according to search. If movie got selected from auto complete, it will populate the fields story and imdb id fields. If admin can't see the movie in the auto complete list, he can fill the title field as well as story field normally.
 
@@ -113,31 +113,43 @@ The data of user's such as booking details, alerts, name, mobile will not be alt
 code-coverage = 85%+
 code-coverage file path => coverage/BookAShow/index.html
 
-## others
+# others
 
-# In production ready code
+## In production ready code
 
 path - dist/BookAShow/browser
+
 gzipper path - gzipper/BookAShow/browser
 
 Progressive Web App - 100%
+
 Accessibility - 92/100
+
 Best practises - 92/100
+
 SEO - 100/100
+
 Performance - 75/100
+
 First Contentful Paint - 0.4s
+
 Time to interactive - 2.8s
+
 Speed Index - 1.0s
+
 Total Blocking Time -260ms
+
 Cumulative Layout Shift - 0
+
 Memory leak between a transaction < 0.1MB
 
-# production ready code gzip version
+## production ready code gzip version
 
 path: gzipped/BookAShow/browser
+
 run gzip version on http-server using 'http-server -g'
 
-# Web Pack build analyzer
+## Web Pack build analyzer
 
 builder cmd: npm run build:stats
 cmd: npm run analyze
