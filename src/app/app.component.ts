@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import { ManualSpinnyService } from './core/services/manual-spinny/manual-spinny.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, AfterViewInit, HostListener, Inject, PLATFORM_ID, OnInit } from '@angular/core';
@@ -12,22 +11,14 @@ export class AppComponent implements AfterViewInit, OnInit {
   isDarkTheme = false;
   isShow = false;
   topPosToStartShowing = 100;
-  isBrowser = false;
 
-  constructor(
-    private overlay: OverlayContainer,
-    private manualSpinnyService: ManualSpinnyService,
-    @Inject(PLATFORM_ID) platformId: any,
-  ) {
+  constructor(private overlay: OverlayContainer, private manualSpinnyService: ManualSpinnyService) {
     this.manualSpinnyService.spin$.next(true);
-    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
-    if (this.isBrowser) {
-      if (sessionStorage.getItem('isDarkTheme') === 'true') {
-        this.toggleTheme({});
-      }
+    if (sessionStorage.getItem('isDarkTheme') === 'true') {
+      this.toggleTheme({});
     }
   }
 
@@ -47,10 +38,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   toggleTheme(event): void {
     this.isDarkTheme = !this.isDarkTheme;
-    if (this.isDarkTheme && this.isBrowser) {
+    if (this.isDarkTheme) {
       this.overlay.getContainerElement().classList.add('dark-theme');
       sessionStorage.setItem('isDarkTheme', 'true');
-    } else if (this.isBrowser) {
+    } else {
       this.overlay.getContainerElement().classList.remove('dark-theme');
       sessionStorage.setItem('isDarkTheme', 'false');
     }

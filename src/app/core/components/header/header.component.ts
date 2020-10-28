@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAdmin = false;
   alertDetails: any;
   notifications: any = [];
-  isBrowser = true;
 
   alertSubscription: Subscription;
   loginSubscription: Subscription;
@@ -38,10 +37,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private fireDb: AngularFireDatabase,
     private alertService: AlertService,
     private datePipe: DatePipe,
-    @Inject(PLATFORM_ID) platformId: any,
   ) {
     this.manulaSpinnyService.spin$.next(true);
-    this.isBrowser = isPlatformBrowser(platformId);
     this.checkAuthState();
   }
 
@@ -71,7 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.manulaSpinnyService.spin$.next(false);
       },
     );
-    if (this.isBrowser && sessionStorage.getItem('isLoggedIn') === 'admin@admin.com') {
+    if (sessionStorage.getItem('isLoggedIn') === 'admin@admin.com') {
       this.loggedIn('admin@admin.com');
       this.isAdmin = true;
     }
@@ -115,9 +112,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   loggedIn(loginData): void {
-    if (this.isBrowser) {
-      window.sessionStorage.setItem('isLoggedIn', loginData);
-    }
+    window.sessionStorage.setItem('isLoggedIn', loginData);
+
     if (loginData === 'admin@admin.com') {
       this.isAdmin = true;
       this.isLoggedIn = true;
@@ -131,9 +127,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    if (this.isBrowser) {
-      window.sessionStorage.removeItem('isLoggedIn');
-    }
+    window.sessionStorage.removeItem('isLoggedIn');
     this.loginService.logout();
     this.isLoggedIn = false;
     this.router.navigateByUrl('/home');

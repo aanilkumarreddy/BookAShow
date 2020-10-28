@@ -31,7 +31,8 @@ describe('HomeComponent', () => {
       title: 'jhf',
       sub_title: 'jjuyf',
       theater: {
-        fromDate: new Date(),
+        fromDate: '28-10-2020',
+        toDate: '28-10-2020',
       },
     },
 
@@ -42,7 +43,8 @@ describe('HomeComponent', () => {
       theater: {
         latitude: 12.4353,
         longitude: 82.54353,
-        fromDate: new Date(),
+        fromDate: '28-11-2020',
+        toDate: '28-11-2020',
         distance: 5.2,
       },
     },
@@ -145,7 +147,7 @@ describe('HomeComponent', () => {
         searchText: 'j',
         distance: 10,
       },
-      { emitEvent: true }
+      { emitEvent: true },
     );
     expect(form.searchText).toBeDefined();
   });
@@ -155,6 +157,13 @@ describe('HomeComponent', () => {
     spyOn(component, 'getState').and.callThrough();
     component.getState(movieList[0], 'b');
     expect(component.getState).toHaveBeenCalled();
+  });
+
+  it('Sholud test parseMovies method ', () => {
+    expect(component.parseMovies).toBeDefined();
+    spyOn(component, 'parseMovies').and.callThrough();
+    component.parseMovies(movieList, false);
+    expect(component.parseMovies).toHaveBeenCalled();
   });
 
   it('calls ngOnDestroy method', () => {

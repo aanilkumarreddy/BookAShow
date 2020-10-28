@@ -29,7 +29,7 @@ export class AddMovieComponent implements OnInit, OnDestroy {
   movieAutoCompleteValues: any = [];
 
   valuChangesSubscription: Subscription;
-
+  minDate = new Date();
   constructor(
     private movieWrapperService: MovieWrapperService,
     private movieService: MovieService,
@@ -37,6 +37,7 @@ export class AddMovieComponent implements OnInit, OnDestroy {
     private snackBarService: SnackBarService,
   ) {
     this.buildForm();
+    console.log(this.minDate);
   }
 
   ngOnInit(): void {

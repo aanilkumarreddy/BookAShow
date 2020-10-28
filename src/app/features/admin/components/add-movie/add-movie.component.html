@@ -156,7 +156,7 @@
               <div>
                 <mat-form-field appearance="outline" class="form-field" [ngClass.xs]="'mobile-form-field'">
                   <mat-label>Showing From</mat-label>
-                  <mat-date-range-input [rangePicker]="picker">
+                  <mat-date-range-input [rangePicker]="picker" [min]="minDate">
                     <input
                       matStartDate
                       [formControl]="theaterForm.controls.startDate"

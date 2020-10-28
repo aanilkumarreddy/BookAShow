@@ -4,6 +4,8 @@
 /dist
 /tmp
 /out-tsc
+/gzipped
+
 # Only exists if Bazel was run
 /bazel-out
 
@@ -40,6 +42,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+/firebase-debug.log
 
 # System Files
 .DS_Store

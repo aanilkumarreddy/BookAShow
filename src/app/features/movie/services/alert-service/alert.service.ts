@@ -18,19 +18,12 @@ export class AlertService {
     private angularFireAuth: AngularFireAuth,
     private angularFireMessaging: AngularFireMessaging,
     private http: HttpClient,
-  ) {
-    // this.angularFireMessaging.messages.subscribe((messaging: any) => {
-    //   messaging.onMessage = messaging.onMessage.bind(messaging);
-    //   messaging.onTokenRefresh = messaging.onTokenRefresh.bind(messaging);
-    // });
-  }
+  ) {}
 
   updateToken(userId, token): void {
-    // we can change this function to request our backend service
     this.angularFireAuth.authState.pipe(take(1)).subscribe(() => {
       const data = {};
       data[userId] = token;
-      // this.angularFireDB.object('fcmTokens/').update(data)
       this.updateFCMTokens(data);
     });
   }
@@ -53,7 +46,6 @@ export class AlertService {
 
   receiveMessage(): void {
     this.angularFireMessaging.messages.subscribe((payload) => {
-      console.log('new message received. ', payload);
       this.currentMessage.next(payload);
     });
   }

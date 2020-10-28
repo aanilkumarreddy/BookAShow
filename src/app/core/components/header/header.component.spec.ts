@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router, ActivatedRoute } from '@angular/router';
-import { from, of, Subject, Subscription } from 'rxjs';
+import { of, Subject, Subscription } from 'rxjs';
 import { AlertService } from 'src/app/features/movie/services/alert-service/alert.service';
 import { MovieService } from 'src/app/features/movie/services/movie-service/movie.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar/snack-bar.service';
@@ -102,9 +102,7 @@ describe('HeaderComponent', () => {
     logout: () => {},
   };
   const matDialogAfter = {
-    afterClosed: jasmine
-      .createSpy('afterClosed')
-      .and.returnValue(of('admin@admin.com')),
+    afterClosed: jasmine.createSpy('afterClosed').and.returnValue(of('admin@admin.com')),
   };
   const matDialogStub = {
     open: jasmine.createSpy('open').and.returnValue(matDialogAfter),
@@ -116,13 +114,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      imports: [
-        BrowserAnimationsModule,
-        MaterialModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FlexLayoutModule,
-      ],
+      imports: [BrowserAnimationsModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule],
       providers: [
         {
           provide: ManualSpinnyService,
