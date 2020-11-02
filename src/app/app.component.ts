@@ -10,14 +10,13 @@ import { Component, AfterViewInit, HostListener, Inject, PLATFORM_ID, OnInit } f
 export class AppComponent implements AfterViewInit, OnInit {
   isDarkTheme = false;
   isShow = false;
-  topPosToStartShowing = 100;
 
   constructor(private overlay: OverlayContainer, private manualSpinnyService: ManualSpinnyService) {
     this.manualSpinnyService.spin$.next(true);
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('isDarkTheme') === 'true') {
+    if (localStorage.getItem('isDarkTheme') === 'true') {
       this.toggleTheme({});
     }
   }
@@ -29,7 +28,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   @HostListener('window:scroll')
   checkScroll(): void {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (scrollPosition >= this.topPosToStartShowing) {
+    if (scrollPosition >= 100) {
       this.isShow = true;
     } else {
       this.isShow = false;
@@ -40,10 +39,10 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.isDarkTheme = !this.isDarkTheme;
     if (this.isDarkTheme) {
       this.overlay.getContainerElement().classList.add('dark-theme');
-      sessionStorage.setItem('isDarkTheme', 'true');
+      localStorage.setItem('isDarkTheme', 'true');
     } else {
       this.overlay.getContainerElement().classList.remove('dark-theme');
-      sessionStorage.setItem('isDarkTheme', 'false');
+      localStorage.setItem('isDarkTheme', 'false');
     }
   }
 

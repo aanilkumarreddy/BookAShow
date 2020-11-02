@@ -37,7 +37,6 @@ export class AddMovieComponent implements OnInit, OnDestroy {
     private snackBarService: SnackBarService,
   ) {
     this.buildForm();
-    console.log(this.minDate);
   }
 
   ngOnInit(): void {
