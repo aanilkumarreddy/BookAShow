@@ -1,8 +1,8 @@
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 
-@import "~material-design-icons/iconfont/material-icons.css";
+@import '~material-design-icons/iconfont/material-icons.css';
 
-@import "./assets/styles/variables.scss";
+@import './assets/styles/variables.scss';
 
 @include mat-core();
 
@@ -19,17 +19,6 @@ $app-dark-theme: mat-dark-theme(
   )
 );
 $app-dark-color: mat-palette($mat-grey, 50);
-/*
-$angular-dark-theme: mat-dark-theme(
-  (
-    color: (
-      primary: $angular-primary,
-      accent: $angular-accent,
-      warn: $angular-warn,
-    ),
-  )
-);
-*/
 .dark-theme {
   @include angular-material-theme($app-dark-theme);
   .mat-progress-spinner circle,
@@ -40,7 +29,7 @@ $angular-dark-theme: mat-dark-theme(
     color: $white-color !important;
   }
 }
-// Normal theme
+// light theme
 $app-light-primary: mat-palette($mat-indigo);
 $app-light-accent: mat-palette($mat-pink, A200, A100, A400);
 $app-light-theme: mat-light-theme($app-light-primary, $app-light-accent);
@@ -52,7 +41,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 .text-icon {
   display: flex;
